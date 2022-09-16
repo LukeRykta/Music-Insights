@@ -1,2 +1,2 @@
 # Music-Insights
-a tool to see what music is relevant
+A tool to see what music is relevant
