@@ -26,6 +26,11 @@
 
 .App-link {
   color: #61dafb;
+  --main-background-color: #3a3b3c; /* Main background color */
+  --banner-color: #30854f; /* Dark Green for the header */
+  --inner-panel-color: #FEFEFE; /* Inner Panel for the charts */
+  --navbar-color: #5c5d5d; /* Navigation Bar */
+  --accent-color: #1DB954; /* Spotify green accent colors for buttons and text borders etc */
 }
 
 @keyframes App-logo-spin {
