@@ -1,14 +1,32 @@
-// used for localhost and IP configuration
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const mongoose = require('mongoose')
+const app = express();
 
-// connect to databse
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        app.listen(process.env.PORT, () => {
-            console.log('connected to db & listening on port', process.env.PORT)
-        })
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+const port = process.env.PORT || 4000;
+// connect to database
+mongoose
+    .connect(process.env.MONG_URI, { useNewUrlParser: true })
+    .then(() => console.log(`DATABASE CONNECTED`))
+    .catch((error) => console.log(error));
+
+mongoose.Promise = global.Promise;
+
+app.use((req, res, next) => {
+    //headers
+    //next();
+});
+
+app.use(cors());
+app.use(express.json);
+
+//require routes
+// app.use("/path", require("./route/etc"))
+
+const hostname = '127.0.0.1';
+
+app.listen(port, () => {
+    console.log(`Server running at http://${hostname}:${port}/`)
+})
