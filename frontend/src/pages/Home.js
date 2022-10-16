@@ -1,8 +1,23 @@
 import logo from '../logo.svg';
 import '../css/App.css';
 import {Link} from "react-router-dom";
+import {getAllTracks} from "../services/trackService";
+import {useEffect, useState} from "react";
 
-function Home() {
+
+
+const Home = () => {
+    const [tracks, setTracks] = useState({
+        title: "",
+        artist: ""
+    });
+
+    const handleChange = (event) => {
+
+    }
+    async function getTracks() {
+    }
+
     return (
         <div className="App">
             <header className="App-header">
