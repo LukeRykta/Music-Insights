@@ -1,6 +1,7 @@
 import '../css/App.css';
 import {Link} from "react-router-dom";
 import faker from 'faker';
+import React from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,6 +13,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import {Button} from "react-bootstrap";
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -58,11 +60,33 @@ export const data = {
 function Chart() {
     return (
         <div className="App">
+            <select>
+                <option value="Genres">Genres</option>
+                <option value="Rap">Rap</option>
+                <option value="Pop">Pop</option>
+                <option value="Rock">Rock</option>
+            </select>
+
+            <select>
+                <option value="Artists">Artists</option>
+                <option value="Artist1">Drake</option>
+                <option value="Artist2">SZA</option>
+                <option value="Artist3">Selena Gomez</option>
+            </select>
+
+            <select>
+                <option value="Songs">Songs</option>
+                <option value="Song1">Song1</option>
+                <option value="Song2">Song2</option>
+                <option value="Song3">Song3</option>
+            </select>
             <header className="App-header">
                 <div style={{height: 700, width: 1000}}>
                     <Line options={options} data={data} />
                 </div>
-                <Link to="/">go to home</Link>
+                <Link to="/">
+                    <Button> go to home </Button>
+                </Link>
             </header>
         </div>
     );

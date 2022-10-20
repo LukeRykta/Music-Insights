@@ -2,6 +2,7 @@ import {Navbar, NavbarBrand} from "react-bootstrap";
 import logo from './logo.svg';
 import "../css/NavBar.css"
 
+
 function NavBar() {
     return (
         <>
@@ -13,11 +14,12 @@ function NavBar() {
                         src={logo}
                     />
                     <a style={{marginLeft: 50}}>
-                        Music Insights
+                        Music InsightS
                     </a>
                 </NavbarBrand>
             </Navbar>
         </>
+
     );
 }
 
