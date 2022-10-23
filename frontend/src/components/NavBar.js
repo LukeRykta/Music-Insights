@@ -1,43 +1,62 @@
-import {Navbar, NavbarBrand} from "react-bootstrap";
+import {Nav, Navbar, NavbarBrand, NavDropdown} from "react-bootstrap";
 import logo from './logo.svg';
 import "../css/NavBar.css"
 import React from "react";
 
-
 function NavBar() {
+    const [selectValue, setSelectValue] = React.useState("");
+    const onChange = (event) => {
+        const value = event.target.value;
+        setSelectValue(value);
+    };
+
     return (
         <>
-            <Navbar className="color-nav" >
-                <NavbarBrand href="/" className="navContainer">
+            <Navbar bg="dark" variant="dark">
+                <Nav>
                     <img
                         className="navImg"
                         alt={""}
                         src={logo}
                     />
-                    <a style={{marginLeft: 50}}>
-                        Music InsightS
-                    </a>
-                </NavbarBrand>
-                <select>
-                    <option value="Genres">Genres</option>
-                    <option value="Rap">Rap</option>
-                    <option value="Pop">Pop</option>
-                    <option value="Rock">Rock</option>
-                </select>
+                    <NavbarBrand className="">
+                        Music Insights
+                    </NavbarBrand>
+                    <div className="navDropdowns">
+                        <NavDropdown
+                            id="nav-dropdown-dark-example"
+                            title="Genre"
+                            menuVariant="dark"
+                        >
+                            <NavDropdown.Item href="#action/3.1">Pop</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Rock</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Classical</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Rap</NavDropdown.Item>
+                        </NavDropdown>
 
-                <select>
-                    <option value="Artists">Artists</option>
-                    <option value="Artist1">Drake</option>
-                    <option value="Artist2">SZA</option>
-                    <option value="Artist3">Selena Gomez</option>
-                </select>
+                        <NavDropdown
+                            id="nav-dropdown-dark-example"
+                            title="Artist"
+                            menuVariant="dark"
+                        >
+                            <NavDropdown.Item href="#action/3.1">Drake</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Kendrick</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">J. Cole</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.4">Lil Baby</NavDropdown.Item>
+                        </NavDropdown>
 
-                <select>
-                    <option value="Songs">Songs</option>
-                    <option value="Song1">Song1</option>
-                    <option value="Song2">Song2</option>
-                    <option value="Song3">Song3</option>
-                </select>
+                        <NavDropdown
+                            id="nav-dropdown-dark-example"
+                            title="Album"
+                            menuVariant="dark"
+                        >
+                            <NavDropdown.Item href="#action/3.1">Scorpion</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">If You're Reading This, It's Too Late</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Nothing Was The Same</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.4">Care Package</NavDropdown.Item>
+                        </NavDropdown>
+                    </div>
+                </Nav>
             </Navbar>
         </>
 

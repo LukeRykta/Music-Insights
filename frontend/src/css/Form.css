@@ -1,0 +1,12 @@
+.form {
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 45px;
+    border: solid 1px #ffffff;
+    box-shadow: 0 5px 5px #ffffff;
+    border-radius: 15px;
+}
+
+.form input {
+    margin: 10px 0;
+}

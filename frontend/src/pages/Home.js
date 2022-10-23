@@ -22,24 +22,23 @@ const Home = () => {
 
     return (
         <div className="App">
-            
-
             <header className="App-header">
+                <img
+                    src={logo}
+                    className="App-logo"
+                    alt="logo"
+                />
 
-                <img src={logo} className="App-logo" alt="logo" />
+                <h1>Welcome to Music Insights</h1>
 
-                <p>
-                    MUSIC INSIGNTS
+                <p className="welcomeDescription">
+                    Find out how relevant your favorite artist is
                 </p>
-                <p>
-                    Track your fav Musicians!!!!
-                </p>
+
                 <Link to="/chart">
-                    <Button>Try It</Button>
+                    <Button className="btn-success">Try It Out</Button>
                 </Link>
-
             </header>
-
         </div>
     );
 }

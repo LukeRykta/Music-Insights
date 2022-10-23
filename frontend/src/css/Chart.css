@@ -1,4 +1,4 @@
 .chartContainer{
-    width: 1000px;
-    height: 700px;
+    box-shadow: 2px 2px 4px 1px #ff0000;
+    border-radius: 15px!important;
 }

@@ -13,7 +13,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import {Button} from "react-bootstrap";
+import {Button, Card, ModalHeader, Tab, Tabs, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -31,26 +31,29 @@ export const options = {
             position: 'top',
         },
         title: {
-            display: true,
-            text: 'Chart.js Line Chart',
+            display: false,
+            text: "Drake vs Kendrick"
         },
     },
 };
 
+const yLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const mLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+const wLabels = ['...', '...', 'Today'];
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export const data = {
     labels,
     datasets: [
         {
-            label: 'Dataset 1',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000})),
+            label: 'Drake',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000})),
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
         {
-            label: 'Dataset 2',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+            label: 'Kendrick',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
             borderColor: 'rgb(53, 162, 235)',
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
@@ -61,11 +64,27 @@ function Chart() {
     return (
         <div className="App">
             <header className="App-header">
-                <div style={{height: 700, width: 1000}}>
-                    <Line options={options} data={data} />
+                <h1>Drake vs Kendrick</h1>
+                <div>
+                    <div className="show">
+                        <ToggleButtonGroup type="radio" name="options" defaultValue={1} style={{marginLeft: 30}}>
+                            <ToggleButton id="tbg-radio-1" value={1} className="btn-success">
+                                Year
+                            </ToggleButton>
+                            <ToggleButton id="tbg-radio-2" value={2} className="btn-success">
+                                Month
+                            </ToggleButton>
+                            <ToggleButton id="tbg-radio-3" value={3} className="btn-success">
+                                Week
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+                    </div>
+                    <div className="chartContainer" style={{paddingBottom: 25, width: window.outerWidth / 1.5}}>
+                        <Line options={options} data={data} />
+                    </div>
                 </div>
                 <Link to="/">
-                    <Button> go to home </Button>
+                    <Button className="btn-success"> Go to Home </Button>
                 </Link>
             </header>
         </div>

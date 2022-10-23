@@ -1,0 +1,10 @@
+.trackCard {
+    box-shadow: 2px 2px 4px 1px #9b9b9b;
+    border-radius: 15px!important;
+}
+
+.trackCard img {
+    border-radius: 15px!important;
+    height: 100px;
+    width: auto;
+}
