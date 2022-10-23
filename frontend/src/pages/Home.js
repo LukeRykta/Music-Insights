@@ -3,6 +3,8 @@ import '../css/App.css';
 import {Link} from "react-router-dom";
 import {getAllTracks} from "../services/trackService";
 import {useEffect, useState} from "react";
+import {Button} from "react-bootstrap";
+import React from "react";
 
 
 
@@ -20,13 +22,24 @@ const Home = () => {
 
     return (
         <div className="App">
+            
+
             <header className="App-header">
+
                 <img src={logo} className="App-logo" alt="logo" />
+
                 <p>
-                    Home Page
+                    MUSIC INSIGNTS
                 </p>
-                <Link to="/chart">go to chart</Link>
+                <p>
+                    Track your fav Musicians!!!!
+                </p>
+                <Link to="/chart">
+                    <Button>Try It</Button>
+                </Link>
+
             </header>
+
         </div>
     );
 }

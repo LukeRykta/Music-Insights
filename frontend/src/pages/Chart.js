@@ -1,6 +1,7 @@
 import '../css/App.css';
 import {Link} from "react-router-dom";
 import faker from 'faker';
+import React from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,6 +13,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import {Button} from "react-bootstrap";
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -62,7 +64,9 @@ function Chart() {
                 <div style={{height: 700, width: 1000}}>
                     <Line options={options} data={data} />
                 </div>
-                <Link to="/">go to home</Link>
+                <Link to="/">
+                    <Button> go to home </Button>
+                </Link>
             </header>
         </div>
     );

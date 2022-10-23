@@ -1,6 +1,6 @@
 .navbar a {
     text-decoration: none;
-    color: #ffffff;
+    color: #000000;
     font-family: 'Poppins', sans-serif;
     font-size: large;
     overflow: hidden;
@@ -22,7 +22,7 @@
 }
 
 .color-nav{
-    background-color: #000000;
+    background-color: #ffffff;
 }
 
 .Navbar-logo {
