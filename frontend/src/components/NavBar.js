@@ -2,6 +2,7 @@ import {Nav, Navbar, NavbarBrand, NavDropdown} from "react-bootstrap";
 import logo from './logo.svg';
 import "../css/NavBar.css"
 import React from "react";
+import {Link} from "react-router-dom";
 
 function NavBar() {
     const [selectValue, setSelectValue] = React.useState("");
@@ -14,11 +15,13 @@ function NavBar() {
         <>
             <Navbar bg="dark" variant="dark">
                 <Nav>
-                    <img
-                        className="navImg"
-                        alt={""}
-                        src={logo}
-                    />
+                    <Link to="/">
+                        <img
+                            className="navImg"
+                            alt={""}
+                            src={logo}
+                        />
+                    </Link>
                     <NavbarBrand className="">
                         Music Insights
                     </NavbarBrand>
