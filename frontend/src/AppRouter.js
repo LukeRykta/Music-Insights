@@ -14,7 +14,8 @@ function AppRouter() {
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
                 <Route path="/chart" element={<Chart />} />
-                <Route path="/track-info" element={<TrackInfo />} /> //detail page for item that is clicked on
+                <Route path="/track" element={<TrackInfo />} />
+                <Route path="/track/:id" element={<TrackInfo />} />
             </Routes>
         </BrowserRouter>
     );

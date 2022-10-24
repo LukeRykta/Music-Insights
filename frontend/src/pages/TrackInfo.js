@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {getTrackById} from "../services/trackService";
 import {useParams} from "react-router-dom";
-
 
 const TrackInfo = () => {
 
@@ -14,13 +12,15 @@ const TrackInfo = () => {
     }, []);
 
     const getTrack = async () => {
-        const response = getTrackById(id);
+        const response = await getTrackById(id);
         setTrack(response.data);
     }
     return (
-        <div>
-            {track.artist}
-        </div>
+        <header className="App-header">
+            <h1 className="card-header">{track.title}</h1>
+            by
+            <span style={{color: "#00FFA7FF"}}>{track.artist}</span>
+        </header>
     )
 }
 

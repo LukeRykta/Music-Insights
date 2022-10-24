@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import React from "react";
 import TrackCard from "../components/TrackItem";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 const Home = () => {
     const [tracks, setTracks] = useState([]);
@@ -16,7 +17,7 @@ const Home = () => {
     });
 
     useEffect(() => {
-        getTracks().then(r => console.log(r));
+        getTracks().then(r => console.log("getTracks called..."));
     }, [])
 
     async function getTracks() {
@@ -38,11 +39,12 @@ const Home = () => {
                 <p className="welcomeDescription">
                     Find out how relevant your favorite albums are
                 </p>
-
-                <Link to="/chart">
-                    <Button className="btn-success">Try It Out</Button>
-                </Link>
-                <Button className="btn-success mt-2" onClick={getTracks}>Get Songs</Button>
+                <div className="flex-row">
+                    <Link to="/chart">
+                        <Button className="btn-success m-2">Try It Out</Button>
+                    </Link>
+                    <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                </div>
                 <div className="container">
                     <div className="row mt-3">
                         {relevant_tracks.map((track) => (
