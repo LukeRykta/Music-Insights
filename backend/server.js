@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 // connect to database
 mongoose
-    .connect(process.env.DB, { useNewUrlParser: true })
+    .connect(process.env.MONG_URI, { useNewUrlParser: true })
     .then((r) => console.log(`DATABASE CONNECTED`))
     .catch((error) => console.log(error));
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 
 //require routes
 // app.use("/path", require("./route/etc"))
@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
     next();
 })
 
-const hostname = '127.0.0.1';
+const hostname = 'localhost';
 
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`)

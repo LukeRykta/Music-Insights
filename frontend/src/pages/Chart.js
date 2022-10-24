@@ -67,7 +67,7 @@ function Chart() {
                 <h1>Drake vs Kendrick</h1>
                 <div>
                     <div className="show">
-                        <ToggleButtonGroup type="radio" name="options" defaultValue={1} style={{marginLeft: 30}}>
+                        <ToggleButtonGroup type="radio" name="options" defaultValue={1} style={{marginLeft: 40}}>
                             <ToggleButton id="tbg-radio-1" value={1} className="btn-success">
                                 Year
                             </ToggleButton>

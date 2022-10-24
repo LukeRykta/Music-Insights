@@ -1,10 +1,12 @@
 .trackCard {
-    box-shadow: 2px 2px 4px 1px #9b9b9b;
+    box-shadow: 2px 2px 2px 0px #00ffa7;
     border-radius: 15px!important;
+    color: black;
+
 }
 
 .trackCard img {
     border-radius: 15px!important;
-    height: 100px;
+    height: 50px;
     width: auto;
 }
