@@ -12,14 +12,22 @@ const Home = () => {
     const [tracks, setTracks] = useState([]);
     const [token, setToken] = useState(['no response']);
     const [album, setAlbum] = useState([]);
+    const [songs, setSongs] = useState([]);
     const relevant_tracks = [];
+    const spotify_tracks = [];
 
     tracks.forEach(function (track){
         relevant_tracks.push(track);
     });
 
+    songs.forEach(function (song){
+        spotify_tracks.push(song.name);
+        console.log(song.name);
+    })
+
     useEffect(() => {
         getTracks().then(r => console.log("getTracks called..."));
+        getAlbum().then(r => console.log("getTracksInAlbum called..."));
     }, [])
 
     async function getTracks() {
@@ -29,13 +37,9 @@ const Home = () => {
 
     async function getAlbum(){
         const response = await getTracksInAlbum();
-        setAlbum(response.data);
-    }
-
-    async function getToken() {
-        const response = await getSpotifyTrack();
         console.log(response.data);
-        setToken(response.data['name']);
+        setAlbum(response.data);
+        setSongs(album.tracks.items);
     }
 
     return (
@@ -60,7 +64,15 @@ const Home = () => {
                     <Button className="btn-success" onClick={getAlbum}>Get Album</Button>
                 </div>
                 <div>
-                    {album['[*].name']}
+                    Album: {album.name}
+                    <br/>
+                    Popularity: {album.popularity}
+                    <br/>
+                    {spotify_tracks.map((song) =>(
+                        <div>
+                            {song}
+                        </div>
+                    ))}
                 </div>
                 <div className="container">
                     <div className="row mt-3">
