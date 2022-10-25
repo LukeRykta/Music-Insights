@@ -28,7 +28,7 @@ export const options = {
     responsive: true,
     plugins: {
         legend: {
-            position: 'top',
+            position: 'bottom',
         },
         title: {
             display: false,
@@ -40,14 +40,14 @@ export const options = {
 const yLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const mLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 const wLabels = ['...', '...', 'Today'];
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export const data = {
     labels,
     datasets: [
         {
             label: 'Drake',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000})),
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 10000})),
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },

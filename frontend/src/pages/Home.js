@@ -1,15 +1,17 @@
 import logo from '../logo.svg';
 import '../css/App.css';
 import {Link} from "react-router-dom";
-import {getAllTracks} from "../services/trackService";
+import {getAllTracks, getTrackById} from "../services/trackService";
+import {getSpotifyTrack, getTracksInAlbum} from "../services/tokenService";
 import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import React from "react";
 import TrackCard from "../components/TrackItem";
-import {wait} from "@testing-library/user-event/dist/utils";
 
 const Home = () => {
     const [tracks, setTracks] = useState([]);
+    const [token, setToken] = useState(['no response']);
+    const [album, setAlbum] = useState([]);
     const relevant_tracks = [];
 
     tracks.forEach(function (track){
@@ -23,6 +25,17 @@ const Home = () => {
     async function getTracks() {
         const response = await getAllTracks();
         setTracks(response.data);
+    }
+
+    async function getAlbum(){
+        const response = await getTracksInAlbum();
+        setAlbum(response.data);
+    }
+
+    async function getToken() {
+        const response = await getSpotifyTrack();
+        console.log(response.data);
+        setToken(response.data['name']);
     }
 
     return (
@@ -41,9 +54,13 @@ const Home = () => {
                 </p>
                 <div className="flex-row">
                     <Link to="/chart">
-                        <Button className="btn-success m-2">Try It Out</Button>
+                        <Button className="btn-success">Try It Out</Button>
                     </Link>
-                    <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                    <Button className="btn-success m-2" onClick={getTracks}>Refresh Songs</Button>
+                    <Button className="btn-success" onClick={getAlbum}>Get Album</Button>
+                </div>
+                <div>
+                    {album['[*].name']}
                 </div>
                 <div className="container">
                     <div className="row mt-3">
