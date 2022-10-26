@@ -62,3 +62,22 @@
     transform: rotate(360deg);
   }
 }
+
+.title {
+  text-align: center;
+  max-width: fit-content;
+}
+
+.category {
+  border-bottom: 3px solid #00ffa4;
+  color: #00ffa7;
+}
+
+.parent {
+  color: gainsboro;
+}
+.child {
+  display: inline-block;
+  padding: 1rem 2rem;
+  vertical-align: middle;
+}
