@@ -13,6 +13,7 @@ const Home = () => {
 
     const [tracks, setTracks] = useState([]);
     const [token, setToken] = useState(['no response']);
+    const [art, setArt] = useState([]);
     const [album, setAlbum] = useState([]);
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
@@ -38,6 +39,7 @@ const Home = () => {
         console.log(response.data);
         setAlbum(response.data);
         setSongs(album.tracks.items);
+        setArt(album.images[1].url);
     }
 
     const handleSubmit = (event) => {
@@ -100,7 +102,7 @@ const Home = () => {
                 {album.name}
                 <div className="child">
                     <img className="category"
-                         src={album.images[1].url}
+                         src={art}
                     />
                 </div>
                 <div className="parent">
