@@ -35,7 +35,7 @@ const Home = () => {
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
-        // console.log(response.data);
+        console.log(response.data);
         setAlbum(response.data);
         setSongs(album.tracks.items);
     }
@@ -98,6 +98,11 @@ const Home = () => {
                 </div>
 
                 {album.name}
+                <div className="child">
+                    <img className="category"
+                         src={album.images[1].url}
+                    />
+                </div>
                 <div className="parent">
                     <div className="child">
                         <div className="category">
