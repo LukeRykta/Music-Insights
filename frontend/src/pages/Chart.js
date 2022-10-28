@@ -1,64 +1,8 @@
 import '../css/App.css';
 import {Link} from "react-router-dom";
-import faker from 'faker';
-import React from "react";
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import React, {useState} from "react";
 import {Button, Card, ModalHeader, Tab, Tabs, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
-
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'bottom',
-        },
-        title: {
-            display: false,
-            text: "Drake vs Kendrick"
-        },
-    },
-};
-
-const yLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const mLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-const wLabels = ['...', '...', 'Today'];
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Drake',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 10000})),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Kendrick',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
+import LineChart from "../components/LineChart";
 
 function Chart() {
     return (
@@ -80,7 +24,7 @@ function Chart() {
                         </ToggleButtonGroup>
                     </div>
                     <div className="chartContainer" style={{paddingBottom: 25, width: window.outerWidth / 1.5}}>
-                        <Line options={options} data={data} />
+                        <LineChart />
                     </div>
                 </div>
                 <Link to="/">
