@@ -26,6 +26,15 @@ ChartJS.register(
 
 export const options = {
     responsive: true,
+    animations: {
+        tension: {
+            duration: 300,
+            easing: 'linear',
+            from: 1,
+            to: 0,
+            loop: false
+        }
+    },
     plugins: {
         legend: {
             position: 'bottom',
