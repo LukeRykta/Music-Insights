@@ -8,7 +8,7 @@ const TrackInfo = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        getTrack().then(r => console.log("get individual track: " + r));
+        getTrack();
     }, []);
 
     const getTrack = async () => {
