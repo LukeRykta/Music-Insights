@@ -2,7 +2,63 @@ import '../css/App.css';
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
 import {Button, Card, ModalHeader, Tab, Tabs, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+
 import LineChart from "../components/LineChart";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+export const options = {
+    responsive: true,
+    animations: {
+        tension: {
+            duration: 300,
+            easing: 'linear',
+            from: 1,
+            to: 0,
+            loop: false
+        }
+    },
+    plugins: {
+        legend: {
+            position: 'bottom',
+        },
+        title: {
+            display: false,
+            text: "Drake vs Kendrick"
+        },
+    },
+};
+
+const yLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const mLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+const wLabels = ['...', '...', 'Today'];
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+export const data = {
+    labels,
+    datasets: [
+        {
+            label: 'Drake',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 10000})),
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+            label: 'Kendrick',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+    ],
+};
 
 function Chart() {
     return (
