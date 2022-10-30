@@ -9,7 +9,7 @@ function Chart() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Drake vs Kendrick</h1>
+                <h1>Drake</h1>
                 <div>
                     <div className="show">
                         <ToggleButtonGroup type="radio" name="options" defaultValue={1} style={{marginLeft: 40}}>
