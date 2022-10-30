@@ -1,19 +1,10 @@
 import '../css/App.css';
 import {Link} from "react-router-dom";
-import faker from 'faker';
-import React from "react";
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import React, {useState} from "react";
 import {Button, Card, ModalHeader, Tab, Tabs, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+
+import LineChart from "../components/LineChart";
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -89,7 +80,7 @@ function Chart() {
                         </ToggleButtonGroup>
                     </div>
                     <div className="chartContainer" style={{paddingBottom: 25, width: window.outerWidth / 1.5}}>
-                        <Line options={options} data={data} />
+                        <LineChart />
                     </div>
                 </div>
                 <Link to="/">
