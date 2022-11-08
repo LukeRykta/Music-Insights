@@ -2,19 +2,22 @@ import logo from '../logo.svg';
 import '../css/App.css';
 import {Link} from "react-router-dom";
 import {getAllTracks, getTrackById} from "../services/trackService";
-import {getSpotifyTrack, getTracksInAlbum} from "../services/spotifyService";
-import {useEffect, useState} from "react";
+import {getTrack} from "../services/spotifyService";
+import {useContext, useEffect, useState} from "react";
 import {Button, Form, FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
 import React from "react";
 import TrackCard from "../components/TrackItem";
+import SpotifyContext from "../context/SpotifyContext";
+import GenreResults from "../components/GenreResults";
 
 const Home = () => {
-    const defaultAlbum = '3SpBlxme9WbeQdI9kx7KAV';
-
+    const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
+    const {getToken, getGenres} = useContext(SpotifyContext);
+    const {getTracksInAlbum} = useContext(SpotifyContext);
     const [tracks, setTracks] = useState([]);
-    const [token, setToken] = useState(['no response']);
     const [art, setArt] = useState([]);
     const [album, setAlbum] = useState([]);
+    const [albumTitle, setAlbumTitle] = useState([]);
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
 
@@ -23,10 +26,22 @@ const Home = () => {
     const track_ids = [];
 
     useEffect(() => {
-        getTracks().then(r => console.log("getTracks called..."));
+        (async () => {
+            getTracks().then(r => console.log("useEffect get tracks triggered - r=" + r));
+        })();
 
-                //     .then(response => setAlbum(response.data))
-                //     .catch(error => console.log(error));
+        return () => {
+            // perform component unmount cleanup
+        }
+    }, []);
+
+    useEffect(() => {
+        //getAlbum(search).then(r => console.log("useEffect get album triggered - r=" + r));
+    }, []);
+
+
+    useEffect(() => {
+        getToken()
     }, [])
 
     async function getTracks() {
@@ -36,9 +51,11 @@ const Home = () => {
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
-        console.log(response.data);
+        console.log(response);
         setAlbum(response.data);
+        console.log(album)
         setSongs(album.tracks.items);
+        setAlbumTitle(album.name);
         setArt(album.images[1].url);
     }
 
@@ -47,7 +64,7 @@ const Home = () => {
         getAlbum(search)
             .then(r => console.log("form submitted... awaiting api results"))
             .catch(error => console.log(error))
-        //setSearch("");
+
     }
 
     tracks.forEach(function (track){
@@ -77,8 +94,17 @@ const Home = () => {
                     <Link to="/chart">
                         <Button className="btn-success">Try It Out</Button>
                     </Link>
-                    <Button className="btn-success m-2" onClick={getTracks}>Refresh Songs</Button>
+                    <Button className="btn-warning m-2" onClick={getGenres}>
+                        Get Genres
+                    </Button>
+                    <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
 
+                </div>
+                <div className="main mt-5 mb-5">
+
+                    <div className="flex-row">
+                        <GenreResults />
+                    </div>
                 </div>
 
                 <div className="title container">
@@ -99,7 +125,7 @@ const Home = () => {
 
                 </div>
 
-                {album.name}
+                {albumTitle}
                 <div className="child">
                     <img className="category"
                          src={art}
@@ -111,7 +137,7 @@ const Home = () => {
                             Song List
                         </div>
                         {track_names.map((name) =>(
-                            <div>
+                            <div key={name}>
                                 {name}
                             </div>
                         ))}
@@ -121,7 +147,7 @@ const Home = () => {
                             Track-Ids
                         </div>
                         {track_ids.map((id) =>(
-                            <div>
+                            <div key={id}>
                                 {id}
                             </div>
                         ))}
