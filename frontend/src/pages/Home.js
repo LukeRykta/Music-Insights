@@ -98,17 +98,15 @@ const Home = () => {
                         Get Genres
                     </Button>
                     <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
-
                 </div>
-                <div className="main mt-5 mb-5">
 
+                <div className="main">
                     <div className="flex-row">
                         <GenreResults />
                     </div>
                 </div>
 
                 <div className="title container">
-
                     <Form onSubmit={handleSubmit}>
                         <FormGroup className="mb-3" controlId="formBasicInput">
                             <FormControl
@@ -122,7 +120,6 @@ const Home = () => {
                             </FormText>
                         </FormGroup>
                     </Form>
-
                 </div>
 
                 {albumTitle}

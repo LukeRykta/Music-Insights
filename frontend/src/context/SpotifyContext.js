@@ -39,7 +39,7 @@ export const SpotifyProvider = ({children}) => {
 
     const getGenres = async () => {
         setLoading();
-        const url = `${SPOTIFY_API}/browse/categories?country=US&offset=0&limit=10`;
+        const url = `${SPOTIFY_API}/browse/categories?country=US&offset=0&limit=40`;
         const config = {
             method: 'GET',
             headers: {

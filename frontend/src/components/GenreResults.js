@@ -1,26 +1,34 @@
 import React, {useContext} from 'react'
 import SpotifyContext from '../context/SpotifyContext'
 import {Button, Card, CardImg} from "react-bootstrap";
+import CardHeader from "react-bootstrap/CardHeader";
 
 function GenreResults() {
     const {genres, getPlaylists} = useContext(SpotifyContext)
 
     return (
         <>
-            <div className="d-flex justify-content-around d-inline-block">
+            <div className="d-flex flex-wrap m-3">
             {genres.map((genre) => {
                 return (
                     <Card key={genre} className="trackCard m-2">
                         <Card.Body>
                             <div>
-                                <Card.Title>{genre.name}</Card.Title>
-                                <Button className="btn-success" onClick={getPlaylists}>
-                                    See Playlists
+                                <CardImg
+                                    src={genre.icons[0].url}
+                                    className="m-2"
+                                    style={{width: 200, height:200}}
+                                    alt="Genre Cover"/>
+                                <Card.Title className="text-center">{genre.name}</Card.Title>
+                            </div>
+                            <div className="Genre-buttons">
+                                <Button
+                                    className="btn-success"
+                                    onClick={getPlaylists}>
+                                        Select Genre
                                 </Button>
                             </div>
-                            <div>
-                                <CardImg src={genre.icons[0].url} alt="Genre Cover"/>
-                            </div>
+
                         </Card.Body>
                     </Card>
                 )

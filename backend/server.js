@@ -11,7 +11,7 @@ const hostname = "localhost";
 // connect to database
 mongoose
     .connect(process.env.MONG_URI, { useNewUrlParser: true })
-    .then((r) => console.log(`DATABASE CONNECTED`))
+    .then((r) => console.log(`MongoDB Atlas Connected`))
     .catch((error) => console.log(error));
 
 // Since mongoose's Promise is deprecated, we override it with Node's Promise
@@ -37,4 +37,5 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`)
+    console.log(`Client running at http://${hostname}:3000/`)
 })
