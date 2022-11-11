@@ -24,10 +24,11 @@ ChartJS.register(
     Filler,
 );
 
-const song1data = ['513', '520', '438', '567', '350', '623', '668', '689', '712', '752', '735', '760'];
-const song2data = ['513', '520', '438', '567', '350', '623', '668', '689', '712', '752', '735', '760'];
-const song3data = ['573', '524', '428', '568', '600', '623', '668', '689', '712', '752', '735', '715'];
-const allSongData = [song1data, song2data, song3data];
+const song1data = ['111', '111', '111', '111', '111', '111', '111', '111', '111', '111', '111', '111'];
+const song2data = ['222', '222', '222', '222', '222', '222', '222', '222', '222', '222', '222', '222'];
+const song3data = ['333', '333', '333', '333', '333', '333', '333', '333', '333', '333', '333', '333'];
+const song4data = ['444', '444', '444', '444', '444', '444', '444', '444', '444', '444', '444', '444'];
+const allSongData = [song1data, song2data, song3data, song4data];
 
 const dataVals = [{name: "test", value: '1'}, {name: "hi", value: '2'}, {name: "brandone likes to code", value:'3'}, {name: "luk", value: '4'}]
 
@@ -118,17 +119,13 @@ function LineChart() {
 
     const [data, setData] = useState(data1);
     const [radioValue, setRadioValue] = useState('1');
+    const [songRadioValue, setSongRadioValue] = useState('1');
 
     const timeRadios = [
         { name: 'Year', value: '1' },
         { name: 'Month', value: '2' },
         { name: 'Week', value: '3' },
     ];
-
-    const songRadios = [
-        dataVals.entries()
-    ];
-
 
     function handleClick1(e){
         setData(data1)
@@ -184,8 +181,15 @@ function LineChart() {
         }
     }
 
+    useEffect(() => {
+        setSongRadioValue(() => songIndex)
+    }, [songIndex])
+
+
     function handleSongChange(e){
-        return 0
+        setSongIndex(e.currentTarget.value)
+        setSongRadioValue(e.currentTarget.value)
+        console.log("target: " + e.currentTarget.value + ", index: " + songIndex);
     }
 
     return(
@@ -207,25 +211,25 @@ function LineChart() {
                         </ToggleButton>
                     ))}
                 </ButtonGroup>
-                <div className="d-flex">
+                <div className="">
                     <Line data={data} options={options} />
                         {/*<Button style={{marginLeft: 40}} onClick={handleClick1}>Legend</Button>*/}
                         {/*<Button onClick={handleClick2}>Energy</Button>*/}
                         {/*<Button onClick={handleClick3}>10 Bands</Button>*/}
                         {/*<Button onClick={inc}>test</Button>*/}
-                    <div className="row-cols-1">
-                        {dataVals.map((radio, idx) => (
+                    <div className="">
+                        {dataVals.map((songRadio, idx) => (
                             <ToggleButton
                                 key={idx}
-                                id={`radio-${idx}`}
+                                id={`songRadio-${idx}`}
                                 type="radio"
-                                name="radio"
-                                value={radio.value}
+                                name="songRadio"
+                                value={songRadio.value-1}
                                 className="btn-success"
-                                checked={radioValue === radio.value}
+                                checked={songRadioValue === songRadio.value}
                                 onChange={handleSongChange}
                             >
-                                {radio.name}
+                                {songRadio.name}
                             </ToggleButton>
                         ))}
                     </div>
