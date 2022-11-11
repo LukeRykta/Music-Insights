@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {
     CategoryScale,
     Chart as ChartJS,
@@ -24,7 +24,7 @@ ChartJS.register(
     Filler,
 );
 
-const song1data = ['111', '111', '111', '111', '111', '111', '111', '111', '111', '111', '111', '111'];
+const song1data = ['111', '222', '333', '444', '555', '666', '777', '888', '999', '111', '111', '111'];
 const song2data = ['222', '222', '222', '222', '222', '222', '222', '222', '222', '222', '222', '222'];
 const song3data = ['333', '333', '333', '333', '333', '333', '333', '333', '333', '333', '333', '333'];
 const song4data = ['444', '444', '444', '444', '444', '444', '444', '444', '444', '444', '444', '444'];
@@ -148,22 +148,15 @@ function LineChart() {
         setData(() => data1)
     }, [songIndex])
 
-    if (radioValue === '1'){
-        //console.log("radio " + radioValue + " detected");
-        useEffect(() => {
-            setData((data) => data1)
-        }, [label])
-    } else if (radioValue === '2'){
-        //console.log("radio " + radioValue + " detected");
-        useEffect(() => {
-            setData((data) => data1)
-        }, [label])
-    } else if (radioValue === '3'){
-        //console.log("radio " + radioValue + " detected");
-        useEffect(() => {
-            setData((data) => data1)
-        }, [label])
-    }
+    useEffect(() => {
+        console.log("radio " + radioValue + " detected");
+            setData(() => data1);
+    }, [label]);
+
+    useEffect(() => {
+        console.log("radio " + radioValue + " detected");
+        setData(() => data1);
+    }, [songIndex]);
 
     function handleChange(e){
         console.log("handle change reached");
@@ -181,14 +174,15 @@ function LineChart() {
         }
     }
 
-    useEffect(() => {
-        setSongRadioValue(() => songIndex)
+    useLayoutEffect(() => {
+        //setSongRadioValue(() => songIndex)
     }, [songIndex])
 
 
     function handleSongChange(e){
-        setSongIndex(e.currentTarget.value)
         setSongRadioValue(e.currentTarget.value)
+        setSongIndex(e.currentTarget.value)
+        //setSongRadioValue(e.currentTarget.value)
         console.log("target: " + e.currentTarget.value + ", index: " + songIndex);
     }
 
