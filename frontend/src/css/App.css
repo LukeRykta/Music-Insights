@@ -24,6 +24,12 @@
   color: white;
 }
 
+.box-shadow-test{
+  box-shadow: 0px 2px 20px 1px black ;
+  padding: 100px;
+  border-radius: 15px!important;
+}
+
 .Genre-buttons{
   display: flex;
   flex-direction: column;

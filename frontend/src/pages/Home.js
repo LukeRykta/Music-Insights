@@ -81,20 +81,21 @@ const Home = () => {
                     className="App-logo"
                     alt="logo"
                 />
+                <div className="box-shadow-test">
+                    <h1 className="">Welcome to Music Insights</h1>
+                    <p className="welcomeDescription">
+                        Find out how relevant your favorite albums are
+                    </p>
 
-                <h1>Welcome to Music Insights</h1>
-                <p className="welcomeDescription">
-                    Find out how relevant your favorite albums are
-                </p>
-
-                <div className="flex-row">
-                    <Link to="/chart">
-                        <Button className="btn-success">Try It Out</Button>
-                    </Link>
-                    <Button className="btn-warning m-2" onClick={getGenres}>
-                        Get Genres
-                    </Button>
-                    <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                    <div className="flex-row">
+                        <Link to="/chart">
+                            <Button className="btn-success">Try It Out</Button>
+                        </Link>
+                        <Button className="btn-warning m-2" onClick={getGenres}>
+                            Get Genres
+                        </Button>
+                        <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                    </div>
                 </div>
 
                 <div className="main">

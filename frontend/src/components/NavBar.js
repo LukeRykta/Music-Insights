@@ -13,7 +13,7 @@ function NavBar() {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" className="shadow-effect">
                 <Nav>
                     <Link to="/">
                         <img
