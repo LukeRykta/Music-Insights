@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {
-    Chart as ChartJS,
     CategoryScale,
+    Chart as ChartJS,
+    Filler,
+    Legend,
     LinearScale,
-    PointElement,
     LineElement,
+    PointElement,
     Title,
     Tooltip,
-    Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import {Button, ButtonGroup, ToggleButton} from "react-bootstrap";
+import {Line} from 'react-chartjs-2';
+import {ButtonGroup, ToggleButton} from "react-bootstrap";
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -18,16 +20,20 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler,
 );
 
-const song1data = ['583', '528', '538', '568', '600', '623', '668', '689', '712', '752', '735', '760'];
+const song1data = ['513', '520', '438', '567', '350', '623', '668', '689', '712', '752', '735', '760'];
 const song2data = ['513', '520', '438', '567', '350', '623', '668', '689', '712', '752', '735', '760'];
 const song3data = ['573', '524', '428', '568', '600', '623', '668', '689', '712', '752', '735', '715'];
+const allSongData = [song1data, song2data, song3data];
+
+const dataVals = [{name: "test", value: '1'}, {name: "hi", value: '2'}, {name: "brandone", value:'3'}, {name: "luk", value: '4'}]
 
 export const view = {
     yLables: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    mLables: ['Week 1', 'Week 2', 'Week 3', 'Week 4', '5', '6','7','8','9','10','11','12'],
+    mLables: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6','Week 7','Week 8','Week 9','Week 10','Week 11','Week 12'],
     wLables: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 }
 //const yLables = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -44,7 +50,16 @@ export const options = {
     },
     responsive: true,
     plugins: {
+        filler: {
+            propogate: true
+        },
         legend: {
+            labels:{
+                font: {
+                    size: 20,
+                    color: "white"
+                }
+            },
             position: 'bottom',
         },
         title: {
@@ -56,15 +71,23 @@ export const options = {
 
 function LineChart() {
     const [label, setLabel] = useState(view.yLables)
+    const [songIndex, setSongIndex] = useState(0);
+
+    function getSet(vals){
+        return vals;
+    }
 
     let data1 = {
         labels: label,
         datasets: [
             {
-                label: 'Legends',
-                data: song1data,
+                label: 'Legend',
+                data: allSongData.map(getSet).at(songIndex),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                fill: 'origin',
+                tension: .4,
+                pointHitRadius: 50,
             },
         ],
     };
@@ -96,11 +119,16 @@ function LineChart() {
     const [data, setData] = useState(data1);
     const [radioValue, setRadioValue] = useState('1');
 
-    const radios = [
+    const timeRadios = [
         { name: 'Year', value: '1' },
         { name: 'Month', value: '2' },
         { name: 'Week', value: '3' },
     ];
+
+    const songRadios = [
+        dataVals.entries()
+    ];
+
 
     function handleClick1(e){
         setData(data1)
@@ -114,20 +142,29 @@ function LineChart() {
         setData(data3)
     }
 
+    function inc(e){
+        setSongIndex(songIndex+1);
+        console.log(songIndex)
+    }
+
+    useEffect(() => {
+        setData(() => data1)
+    }, [songIndex])
+
     if (radioValue === '1'){
-        console.log("radio " + radioValue + " detected");
+        //console.log("radio " + radioValue + " detected");
         useEffect(() => {
-            setData(() => data1)
+            setData((data) => data1)
         }, [label])
     } else if (radioValue === '2'){
-        console.log("radio " + radioValue + " detected");
+        //console.log("radio " + radioValue + " detected");
         useEffect(() => {
-            setData(() => data1)
+            setData((data) => data1)
         }, [label])
     } else if (radioValue === '3'){
-        console.log("radio " + radioValue + " detected");
+        //console.log("radio " + radioValue + " detected");
         useEffect(() => {
-            setData(() => data1)
+            setData((data) => data1)
         }, [label])
     }
 
@@ -147,17 +184,22 @@ function LineChart() {
         }
     }
 
+    function handleSongChange(e){
+        return 0
+    }
+
     return(
         <>
             <div>
                 <ButtonGroup>
-                    {radios.map((radio, idx) => (
+                    {timeRadios.map((radio, idx) => (
                         <ToggleButton
                             key={idx}
                             id={`radio-${idx}`}
                             type="radio"
                             name="radio"
                             value={radio.value}
+                            className="btn-success"
                             checked={radioValue === radio.value}
                             onChange={handleChange}
                         >
@@ -167,9 +209,24 @@ function LineChart() {
                 </ButtonGroup>
                 <Line data={data} options={options} />
                 <div>
-                    <Button style={{marginLeft: 40}} onClick={handleClick1}>Legend</Button>
-                    <Button onClick={handleClick2}>Energy</Button>
-                    <Button onClick={handleClick3}>10 Bands</Button>
+                    {/*<Button style={{marginLeft: 40}} onClick={handleClick1}>Legend</Button>*/}
+                    {/*<Button onClick={handleClick2}>Energy</Button>*/}
+                    {/*<Button onClick={handleClick3}>10 Bands</Button>*/}
+                    {/*<Button onClick={inc}>test</Button>*/}
+                    {dataVals.map((radio, idx) => (
+                        <ToggleButton
+                            key={idx}
+                            id={`radio-${idx}`}
+                            type="radio"
+                            name="radio"
+                            value={radio.value}
+                            className="btn-success"
+                            checked={radioValue === radio.value}
+                            onChange={handleSongChange}
+                        >
+                            {radio.name}
+                        </ToggleButton>
+                    ))}
                 </div>
             </div>
         </>

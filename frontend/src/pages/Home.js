@@ -1,8 +1,7 @@
 import logo from '../logo.svg';
 import '../css/App.css';
 import {Link} from "react-router-dom";
-import {getAllTracks, getTrackById} from "../services/trackService";
-import {getTrack} from "../services/spotifyService";
+import {getAllTracks} from "../services/trackService";
 import {useContext, useEffect, useState} from "react";
 import {Button, Form, FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
 import React from "react";
@@ -39,7 +38,6 @@ const Home = () => {
         //getAlbum(search).then(r => console.log("useEffect get album triggered - r=" + r));
     }, []);
 
-
     useEffect(() => {
         getToken()
     }, [])
@@ -53,7 +51,7 @@ const Home = () => {
         const response = await getTracksInAlbum(search);
         console.log(response);
         setAlbum(response.data);
-        console.log(album)
+        console.log(album);
         setSongs(album.tracks.items);
         setAlbumTitle(album.name);
         setArt(album.images[1].url);
@@ -64,7 +62,6 @@ const Home = () => {
         getAlbum(search)
             .then(r => console.log("form submitted... awaiting api results"))
             .catch(error => console.log(error))
-
     }
 
     tracks.forEach(function (track){
