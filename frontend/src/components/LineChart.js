@@ -29,7 +29,7 @@ const song2data = ['513', '520', '438', '567', '350', '623', '668', '689', '712'
 const song3data = ['573', '524', '428', '568', '600', '623', '668', '689', '712', '752', '735', '715'];
 const allSongData = [song1data, song2data, song3data];
 
-const dataVals = [{name: "test", value: '1'}, {name: "hi", value: '2'}, {name: "brandone", value:'3'}, {name: "luk", value: '4'}]
+const dataVals = [{name: "test", value: '1'}, {name: "hi", value: '2'}, {name: "brandone likes to code", value:'3'}, {name: "luk", value: '4'}]
 
 export const view = {
     yLables: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -207,26 +207,28 @@ function LineChart() {
                         </ToggleButton>
                     ))}
                 </ButtonGroup>
-                <Line data={data} options={options} />
-                <div>
-                    {/*<Button style={{marginLeft: 40}} onClick={handleClick1}>Legend</Button>*/}
-                    {/*<Button onClick={handleClick2}>Energy</Button>*/}
-                    {/*<Button onClick={handleClick3}>10 Bands</Button>*/}
-                    {/*<Button onClick={inc}>test</Button>*/}
-                    {dataVals.map((radio, idx) => (
-                        <ToggleButton
-                            key={idx}
-                            id={`radio-${idx}`}
-                            type="radio"
-                            name="radio"
-                            value={radio.value}
-                            className="btn-success"
-                            checked={radioValue === radio.value}
-                            onChange={handleSongChange}
-                        >
-                            {radio.name}
-                        </ToggleButton>
-                    ))}
+                <div className="d-flex">
+                    <Line data={data} options={options} />
+                        {/*<Button style={{marginLeft: 40}} onClick={handleClick1}>Legend</Button>*/}
+                        {/*<Button onClick={handleClick2}>Energy</Button>*/}
+                        {/*<Button onClick={handleClick3}>10 Bands</Button>*/}
+                        {/*<Button onClick={inc}>test</Button>*/}
+                    <div className="row-cols-1">
+                        {dataVals.map((radio, idx) => (
+                            <ToggleButton
+                                key={idx}
+                                id={`radio-${idx}`}
+                                type="radio"
+                                name="radio"
+                                value={radio.value}
+                                className="btn-success"
+                                checked={radioValue === radio.value}
+                                onChange={handleSongChange}
+                            >
+                                {radio.name}
+                            </ToggleButton>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
