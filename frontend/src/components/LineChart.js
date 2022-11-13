@@ -155,7 +155,7 @@ function LineChart() {
                                         type="radio"
                                         name="radio"
                                         value={radio.value}
-                                        className="btn-success"
+                                        className="btn-success grow"
                                         checked={radioValue === radio.value}
                                         onChange={handleTimeChange}
                                     >
@@ -172,7 +172,7 @@ function LineChart() {
                                     type="radio"
                                     name="songRadio"
                                     value={songRadio.value}
-                                    className="btn-dark m-1"
+                                    className="btn-dark m-1 growTrack"
                                     checked={songRadioValue === songRadio.value}
                                     onChange={handleSongChange}
                                 >

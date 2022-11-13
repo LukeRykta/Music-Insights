@@ -99,6 +99,14 @@
   transform: scale(1.1);
 }
 
+.growTrack {
+  transition: all .1s ease-in-out;
+}
+
+.growTrack:hover {
+  transform: translateY(10%);
+}
+
 .parent {
   color: gainsboro;
 }
