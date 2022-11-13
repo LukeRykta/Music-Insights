@@ -29,14 +29,12 @@ ChartJS.register(
 const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432'];
 const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
 const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
-const song4data = ['234', '345', '444', '324', '346', '676', '623', '345', '734', '346', '752', '531'];
-const song5data = ['234', '345', '444', '324', '346', '676', '623', '345', '734', '346', '752', '531'];
-const song6data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
-const song7data = ['234', '345', '444', '324', '346', '676', '623', '345', '734', '346', '752', '531'];
-const allSongData = [song1data, song2data, song3data, song4data, song5data, song6data, song7data];
+
+const allSongData = [song1data, song2data, song3data, song1data, song2data, song3data, song1data, song2data, song3data];
 
 const songNames = [{name: "Legend", value: '0'}, {name: "Energy", value: '1'}, {name: "10 Bands", value:'2'}, {name: "Know Yourself", value: '3'},
-                   {name: "No Tellin'", value: '4'}, {name: "Madonna", value: '5'}, {name: "6 God", value: '6'},]
+                    {name: "No Tellin'", value: '4'}, {name: "Madonna", value: '5'}, {name: "6 God", value: '6'}, {name: "Star67", value: '7'},
+                     {name: "Preach", value: '8'}]
 
 export const view = {
     yLables: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
