@@ -18,8 +18,7 @@ function Chart() {
                 <div className="box-shadow-test mt-1 flex bg-dark chart-size">
                     <div className="mt-5 d-flex text-center">
                         <h1 className="text-center">Drake</h1>
-
-                        <h1 className="text-center text-muted">If You're Reading This, It's Too Late</h1>
+                        <h1 className="text-muted">...If You're Reading This, It's Too Late</h1>
                     </div>
                     <div className="mt-5 chartContainer mb-3" style={{width: window.outerWidth/1.3}}>
                         <LineChart/>
