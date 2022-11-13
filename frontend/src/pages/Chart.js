@@ -1,28 +1,33 @@
 import '../css/App.css';
 import {Link} from "react-router-dom";
-import React, {useState} from "react";
-import {Button, ButtonGroup, Card, ModalHeader, Tab, Tabs, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import React, {useEffect} from "react";
+import {Button} from "react-bootstrap";
 
 import LineChart from "../components/LineChart";
+import AlbumTray from "../components/AlbumTray";
 
 function Chart() {
+
+    useEffect(() => {
+        window.scrollTo({top: 100, behavior: 'smooth'});
+    })
+
     return (
         <div className="App">
-            <header className="App-header">
+            <header className="App-header header-color">
+                <div className="box-shadow-test mt-1 flex bg-dark chart-size">
+                    <div className="mt-5 d-flex text-center">
+                        <h1 className="text-center">Drake</h1>
 
-                <div className="box-shadow-test">
-                    <h1 className="text-center">Drake</h1>
-                    <div>
-                        <div style={{paddingBottom: 25, width: window.outerWidth / 1.5}}>
-                            <LineChart/>
-                        </div>
+                        <h1 className="text-center text-muted">If You're Reading This, It's Too Late</h1>
                     </div>
-                    <Link to="/">
-                        <Button className="btn-danger"> Go to Home </Button>
-                    </Link>
+                    <div className="mt-5 chartContainer mb-3" style={{width: window.outerWidth/1.3}}>
+                        <LineChart/>
+                    </div>
                 </div>
             </header>
         </div>
+
     );
 }
 //
