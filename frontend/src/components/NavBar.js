@@ -22,7 +22,7 @@ function NavBar() {
                             src={logo}
                         />
                     </Link>
-                    <NavbarBrand className="">
+                    <NavbarBrand>
                         Music Insights
                     </NavbarBrand>
                     <div className="navDropdowns">

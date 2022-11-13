@@ -16,7 +16,7 @@ const TrackInfo = () => {
         setTrack(response.data);
     }
     return (
-        <header className="App-header">
+        <header className="App-header header-color">
             <h1 className="card-header">{track.title}</h1>
             by
             <span style={{color: "#00FFA7FF"}}>{track.artist}</span>

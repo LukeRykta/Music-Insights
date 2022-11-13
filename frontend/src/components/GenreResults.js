@@ -11,7 +11,7 @@ function GenreResults() {
             <div className="d-flex flex-wrap m-3">
             {genres.map((genre) => {
                 return (
-                    <Card key={genre} className="trackCard m-2">
+                    <Card key={genre} className="trackCard m-2 grow">
                         <Card.Body>
                             <div>
                                 <CardImg
@@ -28,7 +28,6 @@ function GenreResults() {
                                         Select Genre
                                 </Button>
                             </div>
-
                         </Card.Body>
                     </Card>
                 )

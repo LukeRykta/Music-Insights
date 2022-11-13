@@ -75,13 +75,13 @@ const Home = () => {
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header className="App-header header-color">
                 <img
                     src={logo}
                     className="App-logo"
                     alt="logo"
                 />
-                <div className="box-shadow-test">
+                <div className="box-shadow-test p-5">
                     <h1 className="">Welcome to Music Insights</h1>
                     <p className="welcomeDescription">
                         Find out how relevant your favorite albums are
@@ -122,7 +122,7 @@ const Home = () => {
 
                 {albumTitle}
                 <div className="child">
-                    <img className="category"
+                    <img className="category grow"
                          src={art}
                     />
                 </div>
