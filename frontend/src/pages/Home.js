@@ -15,6 +15,7 @@ const Home = () => {
     const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
     const {getToken, getGenres} = useContext(SpotifyContext);
     const {getTracksInAlbum} = useContext(SpotifyContext);
+    const {getTrackHistoricStats} = useContext(SpotifyContext);
     const [tracks, setTracks] = useState([]);
     const [art, setArt] = useState([]);
     const [album, setAlbum] = useState([]);
@@ -47,6 +48,7 @@ const Home = () => {
 
     useEffect(() => {
         getToken()
+        getStatTracks()
     }, [])
 
     async function getTracks() {
@@ -64,8 +66,9 @@ const Home = () => {
         setArt(album.images[1].url);
     }
 
-    async function getStatTracks(){
-
+    async function getStatTracks() {
+        const response = await getTrackHistoricStats();
+        console.log(response);
     }
 
     const handleSubmit = (event) => {

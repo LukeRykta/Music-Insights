@@ -61,25 +61,29 @@ export const SpotifyProvider = ({children}) => {
     const getTrackHistoricStats = async () => {
         setLoading();
         const url = 'https://api.songstats.com/enterprise/v1/tracks/historic_stats';
+        console.log("hello1");
         const config = {
             method: 'GET',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
                 'apikey': SONGSTATS_TOKEN
             },
-            formData: {
-                "songstats_artist_id": "3TVXtAsR1Inumwj472S9r4",
-                "spotify_track_id": "3F5CgOj3wFlRv51JsHbxhe",
-                "end-date": "2022-11-13"
+
+            body: {
+                "songstats_artist_id" : "3TVXtAsR1Inumwj472S9r4",
+                "spotify_track_id" : "3F5CgOj3wFlRv51JsHbxhe",
+                "end_date" : "2022-11-13"
             }
         }
 
+        console.log("hello2");
         const historicTrackStats = await axios.get(url, config);
+        console.log("hello3");
         if(historicTrackStats) {
             dispatch({
                 type: 'GET_TRACK_STATS',
-                //payload: stats.[0].data.history.streams_total
-            })
+                payload: historicTrackStats
+            });
 
         }
     }
