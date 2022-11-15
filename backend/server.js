@@ -5,28 +5,37 @@ require('dotenv').config();
 
 const app = express();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
+const hostname = "localhost";
+
 // connect to database
 mongoose
     .connect(process.env.MONG_URI, { useNewUrlParser: true })
-    .then(() => console.log(`DATABASE CONNECTED`))
+    .then((r) => console.log(`MongoDB Atlas Connected`))
     .catch((error) => console.log(error));
 
+// Since mongoose's Promise is deprecated, we override it with Node's Promise
 mongoose.Promise = global.Promise;
 
 app.use((req, res, next) => {
-    //headers
-    //next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
 });
 
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 
 //require routes
 // app.use("/path", require("./route/etc"))
+app.use("/api/tracks", require("./routes/track"));
 
-const hostname = '127.0.0.1';
+app.use((err, req, res, next) => {
+    console.log(err);
+    next();
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`)
+    console.log(`Client running at http://${hostname}:3000/`)
 })

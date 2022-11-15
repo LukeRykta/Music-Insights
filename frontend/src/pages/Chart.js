@@ -1,75 +1,39 @@
 import '../css/App.css';
-import {Link} from "react-router-dom";
-import faker from 'faker';
-import React from "react";
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import {Button} from "react-bootstrap";
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
-
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-        },
-    },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000})),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
+import React, {useEffect, useState} from "react";
+import LineChart from "../components/chart/LineChart";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar/NavBar";
 
 function Chart() {
+
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    };
+
+    useEffect(() => {
+        window.scrollTo({top: 100, behavior: 'smooth'});
+    })
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <div style={{height: 700, width: 1000}}>
-                    <Line options={options} data={data} />
+        <>
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle} />
+
+            <header className="App-header header-color">
+                <div className="box-shadow-test mt-1 flex bg-dark chart-size">
+                    <div className="mt-5 d-flex text-center">
+                        <h1 className="text-center">Drake</h1>
+                        <h1 className="text-muted">...If You're Reading This, It's Too Late</h1>
+                    </div>
+                    <div className="mt-5 chartContainer mb-3" style={{width: window.outerWidth/1.3}}>
+                        <LineChart/>
+                    </div>
                 </div>
-                <Link to="/">
-                    <Button> go to home </Button>
-                </Link>
             </header>
-        </div>
+        </>
     );
 }
-
+//
 export default Chart;

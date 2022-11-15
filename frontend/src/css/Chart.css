@@ -1,4 +1,8 @@
 .chartContainer{
-    width: 1000px;
-    height: 700px;
+
+}
+
+.chartSongsPos{
+    flex-direction: row;
+    flex-wrap: wrap;
 }

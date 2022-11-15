@@ -2,9 +2,9 @@ import '../css/App.css'
 
 function NotFound() {
     return (
-        <div className="App">
+        <header className="">
             <h1>404 NOT FOUND</h1>
-        </div>
+        </header>
     );
 }
 

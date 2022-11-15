@@ -12,4 +12,15 @@ router.get('/', async(req, res) => {
     }
 })
 
+// GET/ single track
+router.get('/track/:id', async(req, res) => {
+    const { id } = req.params;
+    const singleTrack = await Track.findById(id);
+    try {
+        return res.status(200).json(singleTrack);
+    } catch (err) {
+        return res.status(500).json({message: "Unable to get the track"})
+    }
+})
+
 module.exports = router;
