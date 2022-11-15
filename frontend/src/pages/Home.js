@@ -57,6 +57,10 @@ const Home = () => {
         setArt(album.images[1].url);
     }
 
+    async function getStatTracks(){
+
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         getAlbum(search)

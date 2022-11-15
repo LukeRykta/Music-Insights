@@ -15,6 +15,7 @@ export const SpotifyProvider = ({children}) => {
         genres: [],
         album: [],
         playlists: [],
+        trackStats: []
     }
 
     const [state, dispatch] = useReducer(spotifyReducer, initialState);
@@ -63,11 +64,24 @@ export const SpotifyProvider = ({children}) => {
         const config = {
             method: 'GET',
             headers: {
-                'Content-Type' : 'multipart/form-data',
-                'apikey' : SONGSTATS_TOKEN
+                'Content-Type': 'multipart/form-data',
+                'apikey': SONGSTATS_TOKEN
+            },
+            formData: {
+                "songstats_artist_id": "3TVXtAsR1Inumwj472S9r4",
+                "spotify_track_id": "3F5CgOj3wFlRv51JsHbxhe",
+                "end-date": "2022-11-13"
             }
         }
 
+        const historicTrackStats = await axios.get(url, config);
+        if(historicTrackStats) {
+            dispatch({
+                type: 'GET_TRACK_STATS',
+                //payload: stats.[0].data.history.streams_total
+            })
+
+        }
     }
 
     const getTracksInAlbum = async (id) => {
@@ -103,10 +117,13 @@ export const SpotifyProvider = ({children}) => {
         genres: state.genres,
         tracksInAlbum: state.album,
         playlists: state.playlists,
+        historicTrackStats: state.trackStats,
         getToken,
         getGenres,
         getTracksInAlbum,
         getPlaylists,
+        getTrackHistoricStats
+
     }}>
         {children}
     </SpotifyContext.Provider>
