@@ -3,11 +3,13 @@ import '../css/App.css';
 import {Link} from "react-router-dom";
 import {getAllTracks} from "../services/trackService";
 import {useContext, useEffect, useState} from "react";
-import {Button, Form, FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
+import {Button, Form, FormControl, FormGroup, FormText} from "react-bootstrap";
 import React from "react";
-import TrackCard from "../components/TrackItem";
+import TrackCard from "../components/results/TrackItem";
 import SpotifyContext from "../context/SpotifyContext";
-import GenreResults from "../components/GenreResults";
+import GenreResults from "../components/results/GenreResults";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar/NavBar";
 
 const Home = () => {
     const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
@@ -19,6 +21,11 @@ const Home = () => {
     const [albumTitle, setAlbumTitle] = useState([]);
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    };
 
     const db_tracks = [];
     const track_names = [];
@@ -64,7 +71,7 @@ const Home = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         getAlbum(search)
-            .then(r => console.log("form submitted... awaiting api results"))
+            .then(r => console.log(r + " form submitted... awaiting api results"))
             .catch(error => console.log(error))
     }
 
@@ -78,93 +85,98 @@ const Home = () => {
     })
 
     return (
-        <div className="App">
-            <header className="App-header header-color">
-                <img
-                    src={logo}
-                    className="App-logo"
-                    alt="logo"
-                />
-                <div className="box-shadow-test p-5">
-                    <h1 className="">Welcome to Music Insights</h1>
-                    <p className="welcomeDescription">
-                        Find out how relevant your favorite albums are
-                    </p>
-
-                    <div className="flex-row">
-                        <Link to="/chart">
-                            <Button className="btn-success">Try It Out</Button>
-                        </Link>
-                        <Button className="btn-warning m-2" onClick={getGenres}>
-                            Get Genres
-                        </Button>
-                        <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
-                    </div>
-                </div>
-
-                <div className="main">
-                    <div className="flex-row">
-                        <GenreResults />
-                    </div>
-                </div>
-
-                <div className="title container">
-                    <Form onSubmit={handleSubmit}>
-                        <FormGroup className="mb-3" controlId="formBasicInput">
-                            <FormControl
-                                onChange={(e) => setSearch(e.target.value)}
-                                value={search}
-                                type="text"
-                                placeholder="album id"
-                                className="mt-3"/>
-                            <FormText className="text-muted">
-                                Enter an Album ID to return song list
-                            </FormText>
-                        </FormGroup>
-                    </Form>
-                </div>
-
-                {albumTitle}
-                <div className="child">
-                    <img className="category grow"
-                         src={art}
+        <>
+            <div className="App">
+                <Sidebar isOpen={isOpen} toggle={toggle}/>
+                <Navbar toggle={toggle} />
+                <header className="App-header header-color">
+                    <img
+                        src={logo}
+                        className="App-logo"
+                        alt="logo"
                     />
-                </div>
-                <div className="parent">
-                    <div className="child">
-                        <div className="category">
-                            Song List
-                        </div>
-                        {track_names.map((name) =>(
-                            <div key={name}>
-                                {name}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="child">
-                        <div className="category">
-                            Track-Ids
-                        </div>
-                        {track_ids.map((id) =>(
-                            <div key={id}>
-                                {id}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                    <div className="box-shadow-test p-5">
+                        <h1 className="">Welcome to Music Insights</h1>
+                        <p className="welcomeDescription">
+                            Find out how relevant your favorite albums are
+                        </p>
 
-                <div className="container">
-                    <div className="row mt-3">
-                        {db_tracks.map((track) => (
-                            <div key={track._id} className="px-5 my-3 col-lg-3 col-md-6 col-sm-12">
-                                <TrackCard obj={track} />
-                            </div>
-                        ))}
+                        <div className="flex-row">
+                            <Link to="/chart">
+                                <Button className="btn-success">Try It Out</Button>
+                            </Link>
+                            <Button className="btn-warning m-2" onClick={getGenres}>
+                                Get Genres
+                            </Button>
+                            <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                        </div>
                     </div>
-                </div>
 
-            </header>
-        </div>
+                    <div className="main">
+                        <div className="flex-row">
+                            <GenreResults />
+                        </div>
+                    </div>
+
+                    <div className="title container">
+                        <Form onSubmit={handleSubmit}>
+                            <FormGroup className="mb-3" controlId="formBasicInput">
+                                <FormControl
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    value={search}
+                                    type="text"
+                                    placeholder="album id"
+                                    className="mt-3"/>
+                                <FormText className="text-muted">
+                                    Enter an Album ID to return song list
+                                </FormText>
+                            </FormGroup>
+                        </Form>
+                    </div>
+
+                    {albumTitle}
+                    <div className="child">
+                        <img className="category grow"
+                             src={art}
+                             alt="albumArt"
+                        />
+                    </div>
+                    <div className="parent">
+                        <div className="child">
+                            <div className="category">
+                                Song List
+                            </div>
+                            {track_names.map((name) =>(
+                                <div key={name}>
+                                    {name}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="child">
+                            <div className="category">
+                                Track-Ids
+                            </div>
+                            {track_ids.map((id) =>(
+                                <div key={id}>
+                                    {id}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="container">
+                        <div className="row mt-3">
+                            {db_tracks.map((track) => (
+                                <div key={track._id} className="px-5 my-3 col-lg-3 col-md-6 col-sm-12">
+                                    <TrackCard obj={track} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                </header>
+            </div>
+        </>
     );
 }
 

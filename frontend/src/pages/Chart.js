@@ -1,19 +1,26 @@
 import '../css/App.css';
-import {Link} from "react-router-dom";
-import React, {useEffect} from "react";
-import {Button} from "react-bootstrap";
-
-import LineChart from "../components/LineChart";
-import AlbumTray from "../components/AlbumTray";
+import React, {useEffect, useState} from "react";
+import LineChart from "../components/chart/LineChart";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar/NavBar";
 
 function Chart() {
+
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    };
 
     useEffect(() => {
         window.scrollTo({top: 100, behavior: 'smooth'});
     })
 
     return (
-        <div className="App">
+        <>
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle} />
+
             <header className="App-header header-color">
                 <div className="box-shadow-test mt-1 flex bg-dark chart-size">
                     <div className="mt-5 d-flex text-center">
@@ -25,8 +32,7 @@ function Chart() {
                     </div>
                 </div>
             </header>
-        </div>
-
+        </>
     );
 }
 //
