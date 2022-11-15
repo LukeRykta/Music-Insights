@@ -7,6 +7,7 @@ const AUTH_ENDPOINT = process.env.REACT_APP_AUTH_ENDPOINT;
 const SPOTIFY_API = process.env.REACT_APP_SPOTIFY_API;
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+const SONGSTATS_TOKEN = process.env.REACT_APP_SONGSTATS_TOKEN;
 
 export const SpotifyProvider = ({children}) => {
     const initialState = {
@@ -54,6 +55,19 @@ export const SpotifyProvider = ({children}) => {
                 payload: genres.data.categories.items
             });
         }
+    }
+
+    const getTrackHistoricStats = async () => {
+        setLoading();
+        const url = 'https://api.songstats.com/enterprise/v1/tracks/historic_stats';
+        const config = {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'multipart/form-data',
+                'apikey' : SONGSTATS_TOKEN
+            }
+        }
+
     }
 
     const getTracksInAlbum = async (id) => {
