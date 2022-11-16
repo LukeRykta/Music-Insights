@@ -18,6 +18,12 @@ const spotifyReducer = (state, action) => {
                 album: action.payload,
                 loading: false,
             }
+        case 'GET_TRACK_STATS':
+            return {
+                ...state,
+                trackStats: action.payload,
+                loading: false,
+            }
         case 'SET_LOADING':
             return {
                 ...state,
