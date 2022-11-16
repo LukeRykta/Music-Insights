@@ -34,7 +34,7 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            getTracks().then(r => console.log("useEffect get tracks triggered - r=" + r));
+            getTracks();
         })();
 
         return () => {
@@ -48,10 +48,14 @@ const Home = () => {
 
     useEffect(() => {
         getToken()
-        getStatTracks()
     }, [])
 
     async function getTracks() {
+        const response = await getAllTracks();
+        setTracks(response.data);
+    }
+
+    async function getTrackHistory() {
         const response = await getAllTracks();
         setTracks(response.data);
     }
@@ -112,6 +116,7 @@ const Home = () => {
                                 Get Genres
                             </Button>
                             <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                            <Button className="btn-success m-2" onClick={getStatTracks}>stat</Button>
                         </div>
                     </div>
 

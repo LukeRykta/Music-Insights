@@ -35,7 +35,6 @@ const HeroSection = () => {
                     <HeroBtnWrapper>
                         <Btn
                             to="/signup"
-                            smooth={true}
                             onMouseEnter={onHover}
                             onMouseLeave={onHover}
                             primary='true'

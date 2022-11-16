@@ -26,25 +26,21 @@ const NavBar = ({ toggle }) => {
                         <NavItem>
                             <NavLinks
                                 to="about"
-                                smooth="true"
                             >About</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="discover"
-                                smooth="true"
                             >Discover</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="services"
-                                smooth="true"
                             >Services</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="signup"
-                                smooth="true"
                             >Sign Up</NavLinks>
                         </NavItem>
                         <NavBtn>

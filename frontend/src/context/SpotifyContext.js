@@ -60,32 +60,29 @@ export const SpotifyProvider = ({children}) => {
 
     const getTrackHistoricStats = async () => {
         setLoading();
-        const url = 'https://api.songstats.com/enterprise/v1/tracks/historic_stats';
-        console.log("hello1");
+        const url = `https://api.songstats.com/enterprise/v1/tracks/historic_stats`;
         const config = {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'apikey': SONGSTATS_TOKEN
+                'Content-Type' : 'application/json',
+                'apikey': '9f7dea9f-fede-4d69-bb48-8e7d37380695',
             },
-
-            body: {
-                "songstats_artist_id" : "3TVXtAsR1Inumwj472S9r4",
-                "spotify_track_id" : "3F5CgOj3wFlRv51JsHbxhe",
-                "end_date" : "2022-11-13"
+            params: {
+                'source' : 'spotify',
+                'songstats_artist_id' : '3TVXtAsR1Inumwj472S9r4',
+                'spotify_track_id' : '1bDbXMyjaUIooNwFE9wn0N',
+                'end_date' : '2022-11-13'
             }
         }
 
-        console.log("hello2");
         const historicTrackStats = await axios.get(url, config);
-        console.log("hello3");
         if(historicTrackStats) {
             dispatch({
                 type: 'GET_TRACK_STATS',
                 payload: historicTrackStats
-            });
-
+            })
         }
+        return historicTrackStats;
     }
 
     const getTracksInAlbum = async (id) => {
@@ -100,12 +97,10 @@ export const SpotifyProvider = ({children}) => {
         const album = await axios.get(url, config);
         if(album) {
             console.log(album)
-            //console.log("album has context");
             dispatch({
                 type: 'GET_ALBUM',
                 payload: album
             })
-
         }
         return album;
     }
@@ -124,10 +119,9 @@ export const SpotifyProvider = ({children}) => {
         historicTrackStats: state.trackStats,
         getToken,
         getGenres,
+        getTrackHistoricStats,
         getTracksInAlbum,
         getPlaylists,
-        getTrackHistoricStats
-
     }}>
         {children}
     </SpotifyContext.Provider>
