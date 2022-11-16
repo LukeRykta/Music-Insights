@@ -15,6 +15,7 @@ const Home = () => {
     const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
     const {getToken, getGenres} = useContext(SpotifyContext);
     const {getTracksInAlbum} = useContext(SpotifyContext);
+    const {getTrackHistoricStats} = useContext(SpotifyContext);
     const [tracks, setTracks] = useState([]);
     const [art, setArt] = useState([]);
     const [album, setAlbum] = useState([]);
@@ -33,7 +34,7 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            getTracks().then(r => console.log("useEffect get tracks triggered - r=" + r));
+            getTracks();
         })();
 
         return () => {
@@ -54,6 +55,11 @@ const Home = () => {
         setTracks(response.data);
     }
 
+    async function getTrackHistory() {
+        const response = await getAllTracks();
+        setTracks(response.data);
+    }
+
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
         console.log(response);
@@ -62,6 +68,11 @@ const Home = () => {
         setSongs(album.tracks.items);
         setAlbumTitle(album.name);
         setArt(album.images[1].url);
+    }
+
+    async function getStatTracks() {
+        const response = await getTrackHistoricStats();
+        console.log(response);
     }
 
     const handleSubmit = (event) => {
@@ -105,6 +116,7 @@ const Home = () => {
                                 Get Genres
                             </Button>
                             <Button className="btn-success" onClick={getTracks}>Refresh Songs</Button>
+                            <Button className="btn-success m-2" onClick={getStatTracks}>stat</Button>
                         </div>
                     </div>
 
