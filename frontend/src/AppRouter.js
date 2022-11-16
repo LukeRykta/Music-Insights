@@ -14,7 +14,7 @@ function AppRouter() {
                 <Routes>
                     <Route path="/" element={<Newhome />} />
                     <Route path="*" element={<NotFound />} />
-                    <Route path="/newhome" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/chart" element={<Chart />} />
                     <Route path="/track" element={<TrackInfo />} />
                     <Route path="/track/:id" element={<TrackInfo />} />
