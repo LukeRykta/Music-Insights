@@ -26,6 +26,9 @@ ChartJS.register(
     Filler,
 );
 
+const [album, setAlbum] = useState([]);
+const [albumTitle, setAlbumTitle] = useState([]);
+
 const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432'];
 const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
 const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
@@ -136,6 +139,23 @@ function LineChart() {
         setSongRadioValue(e.currentTarget.value)
         setSongIndex(e.currentTarget.value)
         //console.log("target: " + e.currentTarget.value + ", index: " + songIndex);
+    }
+
+    async function getAlbum(search){
+        const response = await getTracksInAlbum(search);
+        console.log(response);
+        setAlbum(response.data);
+        console.log(album);
+        setSongs(album.tracks.items);
+        setAlbumTitle(album.name);
+        setArt(album.images[1].url);
+    }
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        getAlbum(search)
+            .then(r => console.log(r + " form submitted... awaiting api results"))
+            .catch(error => console.log(error))
     }
 
     useEffect(() => {
