@@ -87,6 +87,7 @@ export const options = {
 };
 
 function LineChart() {
+    const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
     const [label, setLabel] = useState(view.yLables)
     const [songIndex, setSongIndex] = useState(0);
     const [radioValue, setRadioValue] = useState('1');
@@ -94,6 +95,7 @@ function LineChart() {
     const [album, setAlbum] = useState([]);
     const [albumTitle, setAlbumTitle] = useState([]);
     const [art, setArt] = useState([]);
+    const [search, setSearch] = useState(defaultAlbum);
 
     const timeRadios = [
         { name: 'Year', value: '1' },
@@ -152,6 +154,7 @@ function LineChart() {
 
     const handleClick = (event) => {
         event.preventDefault();
+        setSearch([])
         getAlbum(search)
             .then(r => console.log(r + " form submitted... awaiting api results"))
             .catch(error => console.log(error))
