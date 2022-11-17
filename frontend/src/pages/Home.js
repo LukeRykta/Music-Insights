@@ -10,6 +10,7 @@ import SpotifyContext from "../context/SpotifyContext";
 import GenreResults from "../components/results/GenreResults";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar/NavBar";
+import tempAlbumArt from "../assets/tempAlbumArt.png";
 
 const Home = () => {
     const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
@@ -17,9 +18,9 @@ const Home = () => {
     const {getTracksInAlbum} = useContext(SpotifyContext);
     const {getTrackHistoricStats} = useContext(SpotifyContext);
     const [tracks, setTracks] = useState([]);
-    const [art, setArt] = useState([]);
+    const [art, setArt] = useState(tempAlbumArt);
     const [album, setAlbum] = useState([]);
-    const [albumTitle, setAlbumTitle] = useState([]);
+    const [albumTitle, setAlbumTitle] = useState('Album Title');
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
     const [isOpen, setIsOpen] = useState(false)
@@ -145,6 +146,7 @@ const Home = () => {
                     {albumTitle}
                     <div className="child">
                         <img className="category grow"
+                             style={{maxWidth: 250}}
                              src={art}
                              alt="albumArt"
                         />

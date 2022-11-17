@@ -26,9 +26,6 @@ ChartJS.register(
     Filler,
 );
 
-const [album, setAlbum] = useState([]);
-const [albumTitle, setAlbumTitle] = useState([]);
-
 const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432'];
 const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
 const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
@@ -94,6 +91,9 @@ function LineChart() {
     const [songIndex, setSongIndex] = useState(0);
     const [radioValue, setRadioValue] = useState('1');
     const [songRadioValue, setSongRadioValue] = useState('0');
+    const [album, setAlbum] = useState([]);
+    const [albumTitle, setAlbumTitle] = useState([]);
+    const [art, setArt] = useState([]);
 
     const timeRadios = [
         { name: 'Year', value: '1' },
@@ -143,9 +143,8 @@ function LineChart() {
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
-        console.log(response);
         setAlbum(response.data);
-        console.log(album);
+        // console.log(album);
         setSongs(album.tracks.items);
         setAlbumTitle(album.name);
         setArt(album.images[1].url);
