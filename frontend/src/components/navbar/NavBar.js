@@ -12,8 +12,18 @@ import {
     NavBtn,
     NavBtnLink
 } from "./NavbarElements";
+import {Form, FormControl, FormGroup, FormText} from "react-bootstrap";
 
 const NavBar = ({ toggle }) => {
+    function handleSubmit() {
+
+    }
+
+    function setSearch(value) {
+
+    }
+
+    let search;
     return (
         <>
             <Nav>
@@ -43,6 +53,18 @@ const NavBar = ({ toggle }) => {
                                 to="signup"
                             >Sign Up</NavLinks>
                         </NavItem>
+                        <div className="">
+                            <Form onSubmit={handleSubmit}>
+                                <FormGroup className="mb-3"  controlId="formBasicInput">
+                                    <FormControl
+                                        onChange={(e) => setSearch(e.target.value)}
+                                        value={search}
+                                        type="text"
+                                        placeholder="Search"
+                                        className="mt-3"/>
+                                </FormGroup>
+                            </Form>
+                        </div>
                         <NavBtn>
                             <NavBtnLink
                                 to='/'
