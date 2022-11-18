@@ -63,9 +63,7 @@ const Home = () => {
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
-        console.log(response);
         setAlbum(response.data);
-        console.log(album);
         setSongs(album.tracks.items);
         setAlbumTitle(album.name);
         setArt(album.images[1].url);

@@ -33,9 +33,11 @@ const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845'
 
 const allSongData = [song1data, song2data, song3data, song1data, song2data, song3data, song1data, song2data, song3data];
 
-const songNames = [{name: "Legend", value: '0'}, {name: "Energy", value: '1'}, {name: "10 Bands", value:'2'}, {name: "Know Yourself", value: '3'},
-                    {name: "No Tellin'", value: '4'}, {name: "Madonna", value: '5'}, {name: "6 God", value: '6'}, {name: "Star67", value: '7'},
-                     {name: "Preach", value: '8'}]
+// const songNames = [{name: "Legend", value: '0'}, {name: "Energy", value: '1'}, {name: "10 Bands", value:'2'}, {name: "Know Yourself", value: '3'},
+//                     {name: "No Tellin'", value: '4'}, {name: "Madonna", value: '5'}, {name: "6 God", value: '6'}, {name: "Star67", value: '7'},
+//                      {name: "Preach", value: '8'}]
+
+const songNames =  [];
 
 export const view = {
     yLables: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -87,18 +89,21 @@ export const options = {
     },
 };
 
-function LineChart() {
-    const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
+function LineChart(size) {
+    const defaultAlbum = '79ONNoS4M9tfIA1mYLBYVX';
     const {getToken, getGenres, getTracksInAlbum, token} = useContext(SpotifyContext);
     const [label, setLabel] = useState(view.yLables)
     const [songIndex, setSongIndex] = useState(0);
     const [radioValue, setRadioValue] = useState('1');
     const [songRadioValue, setSongRadioValue] = useState('0');
+    const [artistName, setArtistName] = useState([]);
     const [album, setAlbum] = useState([]);
-    const [albumTitle, setAlbumTitle] = useState([]);
+    const [albumTitle, setAlbumTitle] = useState();
     const [songs, setSongs] = useState([]);
     const [art, setArt] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
+
+    const song_ids = [];
 
     const timeRadios = [
         { name: 'Year', value: '1' },
@@ -148,22 +153,23 @@ function LineChart() {
 
     useEffect(() => {
         getToken()
+        console.log(size);
     }, [])
 
     useEffect(() => {
-        console.log("hi")
-        getAlbum(search)
-            .then(r => console.log(r + " form submitted... awaiting api results"))
-            .catch(error => console.log(error))
+        if (token !== '' && album !== []){
+            getAlbum(search).catch(error => console.log(error))
+        }
     }, [token])
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
+        console.log(response)
+        setArtistName(response.data.artists[0].name)
         setAlbum(response.data);
-        // console.log(album);
-        setSongs(album.tracks.items);
-        setAlbumTitle(album.name);
-        setArt(album.images[1].url);
+        setAlbumTitle(response.data.name);
+        setSongs(response.data.tracks.items);
+        setArt(response.data.images[0].url);
     }
 
     const handleClick = (event) => {
@@ -179,55 +185,59 @@ function LineChart() {
 
     return(
         <>
-            <div>
+            <div className="bg-dark">
+                <div className="mt-5 d-flex text-center mb-3">
+                    <h1 className="text-center">{artistName}</h1>
+                    <h1 className="text-muted" style={{paddingLeft:20}}>{albumTitle}</h1>
+                    <img
+                        src={art}
+                        className="chartArt"
+                        style={{height: 50, paddingLeft:20}}
+                    />
+                </div>
                 <div className="">
-                    <div className="">
-                        <Line data={data} options={options} />
-                    </div>
-
-                    <div className="d-flex">
-                        <div>
-                            <ButtonGroup className=" px-5">
-                                {timeRadios.map((radio, idx) => (
-                                    <ToggleButton
-                                        key={idx}
-                                        id={`radio-${idx}`}
-                                        type="radio"
-                                        name="radio"
-                                        value={radio.value}
-                                        className="btn-success grow"
-                                        checked={radioValue === radio.value}
-                                        onChange={handleTimeChange}
-                                    >
-                                        {radio.name}
-                                    </ToggleButton>
-                                ))}
-                            </ButtonGroup>
-                        </div>
-                        <div>
-                            {songNames.map((songRadio, idx) => (
+                    <Line data={data} options={options} />
+                </div>
+                <div className="d-flex">
+                    <div>
+                        <ButtonGroup className=" px-5">
+                            {timeRadios.map((radio, idx) => (
                                 <ToggleButton
-                                    onClick={handleClick}
                                     key={idx}
-                                    id={`songRadio-${idx}`}
+                                    id={`radio-${idx}`}
                                     type="radio"
-                                    name="songRadio"
-                                    value={songRadio.value}
-                                    className="btn-dark m-1 growTrack"
-                                    checked={songRadioValue === songRadio.value}
-                                    onChange={handleSongChange}
+                                    name="radio"
+                                    value={radio.value}
+                                    className="btn-success grow"
+                                    checked={radioValue === radio.value}
+                                    onChange={handleTimeChange}
                                 >
-                                    {songRadio.name}
+                                    {radio.name}
                                 </ToggleButton>
                             ))}
-                        </div>
-                        <div className="px-5">
-                            <AlbumTray/>
-                            <Link to="/">
-                                <Button className="btn-danger"> Go to Home </Button>
-                            </Link>
-                        </div>
-
+                        </ButtonGroup>
+                    </div>
+                    <div>
+                        {songs.map((songRadio, idx) => (
+                            <ToggleButton
+                                key={idx}
+                                id={`songRadio-${idx}`}
+                                type="radio"
+                                name="songRadio"
+                                value={idx.toString()}
+                                className="btn-dark m-1 growTrack"
+                                checked={songRadioValue === idx.toString()}
+                                onChange={handleSongChange}
+                            >
+                                {songRadio.name}
+                            </ToggleButton>
+                        ))}
+                    </div>
+                    <div className="px-5">
+                        <AlbumTray/>
+                        <Link to="/">
+                            <Button className="btn-danger"> Go to Home </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

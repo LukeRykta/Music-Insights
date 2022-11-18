@@ -27,6 +27,7 @@ const InfoSection = ({
     primary,
     dark,
     dark2,
+    route,
     }) => {
     return (
         <>
@@ -40,10 +41,8 @@ const InfoSection = ({
                                 <Subtitle darkText={darkText}>{description}</Subtitle>
                                 <BtnWrap>
                                     <Btn
-                                        to="signup"
+                                        to={route}
                                         className="grow"
-                                        smooth={true}
-                                        duration={500}
                                         spy={true}
                                         exact="true"
                                         offset={-60}

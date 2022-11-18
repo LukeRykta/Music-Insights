@@ -96,7 +96,6 @@ export const SpotifyProvider = ({children}) => {
 
         const album = await axios.get(url, config);
         if(album) {
-            console.log(album)
             dispatch({
                 type: 'GET_ALBUM',
                 payload: album
