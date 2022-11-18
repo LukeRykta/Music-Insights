@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
     CategoryScale,
     Chart as ChartJS,
@@ -14,6 +14,7 @@ import {Line} from 'react-chartjs-2';
 import {Button, ButtonGroup, ToggleButton} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AlbumTray from "./AlbumTray";
+import SpotifyContext from "../../context/SpotifyContext";
 
 ChartJS.register(
     CategoryScale,
@@ -88,12 +89,14 @@ export const options = {
 
 function LineChart() {
     const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
+    const {getToken, getGenres, getTracksInAlbum, token} = useContext(SpotifyContext);
     const [label, setLabel] = useState(view.yLables)
     const [songIndex, setSongIndex] = useState(0);
     const [radioValue, setRadioValue] = useState('1');
     const [songRadioValue, setSongRadioValue] = useState('0');
     const [album, setAlbum] = useState([]);
     const [albumTitle, setAlbumTitle] = useState([]);
+    const [songs, setSongs] = useState([]);
     const [art, setArt] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
 
@@ -143,6 +146,17 @@ function LineChart() {
         //console.log("target: " + e.currentTarget.value + ", index: " + songIndex);
     }
 
+    useEffect(() => {
+        getToken()
+    }, [])
+
+    useEffect(() => {
+        console.log("hi")
+        getAlbum(search)
+            .then(r => console.log(r + " form submitted... awaiting api results"))
+            .catch(error => console.log(error))
+    }, [token])
+
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
         setAlbum(response.data);
@@ -154,7 +168,6 @@ function LineChart() {
 
     const handleClick = (event) => {
         event.preventDefault();
-        setSearch([])
         getAlbum(search)
             .then(r => console.log(r + " form submitted... awaiting api results"))
             .catch(error => console.log(error))
@@ -194,6 +207,7 @@ function LineChart() {
                         <div>
                             {songNames.map((songRadio, idx) => (
                                 <ToggleButton
+                                    onClick={handleClick}
                                     key={idx}
                                     id={`songRadio-${idx}`}
                                     type="radio"
