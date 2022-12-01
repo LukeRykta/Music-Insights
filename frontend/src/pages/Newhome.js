@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/navbar/NavBar';
 import Sidebar from '../components/sidebar/index'
 import HeroSection from "../components/hero-section";

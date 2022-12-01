@@ -27,9 +27,11 @@ ChartJS.register(
     Filler,
 );
 
-const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432'];
-const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
-const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
+// const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432'];
+const dummyData = [...Array(365).keys()];
+// const song1data = ['234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432', '234', '634', '823', '124', '525', '513', '129', '592', '146', '154', '472', '432']
+// const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
+// const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
 
 const allSongData = [song1data, song2data, song3data, song1data, song2data, song3data, song1data, song2data, song3data];
 
@@ -40,7 +42,8 @@ const allSongData = [song1data, song2data, song3data, song1data, song2data, song
 const songNames =  [];
 
 export const view = {
-    yLables: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    // yLables: ['January','January','January','January','January','January','January','January','January','January','January','January','February','February','February','February','February','February','February','February','February','February','February','February','March','March','March','March','March','March','March','March','March','March','March','March','April','April','April','April','April','April','April','April','April','April','April','April','May','May','May','May','May','May','May','May','May','May','May','May','June', 'June', 'July', 'July', 'August', 'August', 'September', 'September', 'October', 'October', 'November', 'November', 'December', 'December', ],
+    yLables: ['January', null, null, 'February', null, null,'March','April','May','June','July','August','September','October','November','December'],
     mLables: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6','Week 7','Week 8'],
     wLables: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 }
@@ -48,18 +51,38 @@ export const view = {
 export const options = {
     scales: {
         x: {
+            ticks:{
+                display: true,
+                drawTicks: false,
+                autoSkip: false,
+                callback: function(val, index) {
+                    // Hide every 2nd tick label
+                    // return index % 2 === 0 ? this.getLabelForValue(val) : '';
+                    if(monthDayObj[index]) {
+                        return monthDayObj[index];
+                    }
+                    return '';
+                },
+            },
             title: {
                 display: true,
-                text: 'Time'
+                text: 'Time',
+                font: {
+                    size: 20
+                }
             }
         },
         y: {
             stacked: true,
             title: {
                 display: true,
-                text: 'Listens'
+                text: 'Listens',
+                font: {
+                    size: 20
+                }
+
             }
-        }
+        },
     },
     animations: {
         tension: {
@@ -90,7 +113,7 @@ export const options = {
 };
 
 function LineChart(size) {
-    const defaultAlbum = '79ONNoS4M9tfIA1mYLBYVX';
+    const defaultAlbum = '4j8uA4o5U4eoZJ2jXbNklD';
     const {getToken, getGenres, getTracksInAlbum, token} = useContext(SpotifyContext);
     const [label, setLabel] = useState(view.yLables)
     const [songIndex, setSongIndex] = useState(0);
@@ -119,15 +142,15 @@ function LineChart(size) {
         labels: label,
         datasets: [
             {
-                label: false,
                 data: allSongData.map(getSet).at(songIndex),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.3)',
                 fill: 'origin',
                 tension: 200,
+                hoverBorderDash: 2,
                 pointHitRadius: 200,
                 pointHoverRadius: 15,
-                pointHoverBorderWidth: 0
+                pointHoverBorderWidth: 2,
             },
         ],
     };

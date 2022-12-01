@@ -1,5 +1,7 @@
-import React from "react";
-import {FaBars} from 'react-icons/fa';
+import React, { useContext, useEffect } from "react";
+import { FaBars } from 'react-icons/fa';
+import {Form, FormControl, FormGroup} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import {
     MobileIcon,
@@ -10,20 +12,25 @@ import {
     NavMenu,
     NavItem,
     NavBtn,
-    NavBtnLink
+    NavBtnLink,
+    RightWrapper,
+    LeftWrapper
 } from "./NavbarElements";
-import {Form, FormControl, FormGroup, FormText} from "react-bootstrap";
+import SpotifyContext from "../../context/SpotifyContext";
 
-const NavBar = ({ toggle }) => {
-    function handleSubmit() {
+const NavBar = ({ search, handleSearchChange, toggle, selectedNavItem, handleNavScrolled }) => {
+    const {getSearchResults, getToken} = useContext(SpotifyContext);
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        getToken();
+    }, [])
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        navigate("/results");
     }
 
-    function setSearch(value) {
-
-    }
-
-    let search;
     return (
         <>
             <Nav>
@@ -53,23 +60,25 @@ const NavBar = ({ toggle }) => {
                                 to="signup"
                             >Sign Up</NavLinks>
                         </NavItem>
-                        <div className="">
-                            <Form onSubmit={handleSubmit}>
-                                <FormGroup className="mb-3"  controlId="formBasicInput">
-                                    <FormControl
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        value={search}
-                                        type="text"
-                                        placeholder="Search"
-                                        className="mt-3"/>
-                                </FormGroup>
-                            </Form>
-                        </div>
+                    </LeftWrapper>
+
+                    <RightWrapper>
+                        <Form onSubmit={handleSubmit} style={{width: '20rem', marginBottom: '5px'}}>
+                            <FormGroup controlId="formBasicInput">
+                                <FormControl
+                                    onChange={(e) => handleSearchChange(e.target.value)}
+                                    value={search}
+                                    type="text"
+                                    placeholder="search"
+                                />
+                            </FormGroup>
+                        </Form>
+
                         <NavBtn>
-                            <NavBtnLink
-                                to='/'
-                            >Sign In</NavBtnLink>
+                            <NavBtnLink to='/'>Sign In</NavBtnLink>
                         </NavBtn>
+                    </RightWrapper>
+
                     </NavMenu>
                 </NavbarContainer>
             </Nav>

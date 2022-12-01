@@ -43,9 +43,6 @@ const InfoSection = ({
                                     <Btn
                                         to={route}
                                         className="grow"
-                                        spy={true}
-                                        exact="true"
-                                        offset={-60}
                                         primary={primary ? 1 : 0}
                                         dark={dark ? 1 : 0}
                                         dark2={dark2 ? 1 : 0}

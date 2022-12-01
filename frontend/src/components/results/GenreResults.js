@@ -36,4 +36,4 @@ function GenreResults() {
     )
 }
 
-export default GenreResults
+export default GenreResults;

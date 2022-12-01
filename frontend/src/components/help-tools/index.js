@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Icon1 from '../../images/svg-1.png'
 import Icon2 from '../../images/svg-2.png'
 import Icon3 from '../../images/svg-6.png'
@@ -11,10 +11,17 @@ import {
     ServicesP,
     ServicesWrapper
 } from "./toolElements";
+import {useOnScreen} from "../../utils";
 
-const Services = () => {
+const Services = ({ handleNavScrolled }) => {
+
+    const myRef = useRef();
+
+    const isVisible = useOnScreen(myRef);
+    handleNavScrolled('services', isVisible);
+
     return (
-        <ServicesContainer id="services">
+        <ServicesContainer id="services" ref={myRef}>
             <ServicesH1>Our Services</ServicesH1>
             <ServicesWrapper>
                 <ServicesCard>

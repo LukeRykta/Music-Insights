@@ -12,6 +12,7 @@ const SONGSTATS_TOKEN = process.env.REACT_APP_SONGSTATS_TOKEN;
 export const SpotifyProvider = ({children}) => {
     const initialState = {
         token: '',
+        results: [],
         genres: [],
         album: [],
         playlists: [],
@@ -39,6 +40,31 @@ export const SpotifyProvider = ({children}) => {
         }
     };
 
+    const getSearchResults = async (id) => {
+        setLoading();
+        const url = `${SPOTIFY_API}/search` //todo confirm uri
+
+        const config = {
+            headers: {
+                Authorization : 'Bearer ' + state.token
+            },
+            params: {
+                'q' : JSON.stringify(id),
+                'type' : 'artist,album,track',
+                'limit' : '15',
+            }
+        };
+
+        const results = await axios.get(url, config);
+        if(results) {
+            dispatch({
+                type: 'GET_SEARCH',
+                payload: results
+            })
+        }
+        return results;
+    }
+
     const getGenres = async () => {
         setLoading();
         const url = `${SPOTIFY_API}/browse/categories?country=US&offset=0&limit=40`;
@@ -65,7 +91,7 @@ export const SpotifyProvider = ({children}) => {
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json',
-                'apikey': '9f7dea9f-fede-4d69-bb48-8e7d37380695',
+                'apikey': `${SONGSTATS_TOKEN}`,
             },
             params: {
                 'source' : 'spotify',
@@ -112,11 +138,13 @@ export const SpotifyProvider = ({children}) => {
 
     return <SpotifyContext.Provider value={{
         token: state.token,
+        results: state.results,
         genres: state.genres,
         tracksInAlbum: state.album,
         playlists: state.playlists,
         historicTrackStats: state.trackStats,
         getToken,
+        getSearchResults,
         getGenres,
         getTrackHistoricStats,
         getTracksInAlbum,
