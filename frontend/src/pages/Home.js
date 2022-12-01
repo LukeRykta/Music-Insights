@@ -10,16 +10,17 @@ import SpotifyContext from "../context/SpotifyContext";
 import GenreResults from "../components/results/GenreResults";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar/NavBar";
+import tempAlbumArt from "../assets/tempAlbumArt.png";
 
 const Home = () => {
-    const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
+    const defaultAlbum = '4j8uA4o5U4eoZJ2jXbNklD';
     const {getToken, getGenres} = useContext(SpotifyContext);
     const {getTracksInAlbum} = useContext(SpotifyContext);
     const {getTrackHistoricStats} = useContext(SpotifyContext);
     const [tracks, setTracks] = useState([]);
-    const [art, setArt] = useState([]);
+    const [art, setArt] = useState(tempAlbumArt);
     const [album, setAlbum] = useState([]);
-    const [albumTitle, setAlbumTitle] = useState([]);
+    const [albumTitle, setAlbumTitle] = useState('Album Title');
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState(defaultAlbum);
     const [isOpen, setIsOpen] = useState(false)
@@ -62,9 +63,7 @@ const Home = () => {
 
     async function getAlbum(search){
         const response = await getTracksInAlbum(search);
-        console.log(response);
         setAlbum(response.data);
-        console.log(album);
         setSongs(album.tracks.items);
         setAlbumTitle(album.name);
         setArt(album.images[1].url);
@@ -134,7 +133,8 @@ const Home = () => {
                                     value={search}
                                     type="text"
                                     placeholder="album id"
-                                    className="mt-3"/>
+                                    className="mt-3"
+                                />
                                 <FormText className="text-muted">
                                     Enter an Album ID to return song list
                                 </FormText>
@@ -145,6 +145,7 @@ const Home = () => {
                     {albumTitle}
                     <div className="child">
                         <img className="category grow"
+                             style={{maxWidth: 250}}
                              src={art}
                              alt="albumArt"
                         />

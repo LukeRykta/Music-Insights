@@ -6,6 +6,12 @@ const spotifyReducer = (state, action) => {
                 token: action.payload,
                 loading: false,
             }
+        case 'GET_SEARCH':
+            return {
+                ...state,
+                results: action.payload,
+                loading: false,
+            }
         case 'GET_GENRES':
             return {
                 ...state,

@@ -93,6 +93,15 @@
   color: #00ffa7;
 }
 
+.searchCategory {
+  border-bottom: 3px solid #00ffa4;
+  margin-bottom: 20px;
+}
+
+.itemPointer {
+  cursor: pointer;
+}
+
 .chart-footer {
   border-bottom: 3px solid rgba(40, 44, 52, 0.49);
   color: #00ffa7;
@@ -103,6 +112,7 @@
 }
 
 .grow:hover {
+  color: #000000;
   transform: scale(1.1);
 }
 
@@ -111,6 +121,7 @@
 }
 
 .growSm:hover {
+  color: #01bf71;
   transform: scale(1.01);
 }
 

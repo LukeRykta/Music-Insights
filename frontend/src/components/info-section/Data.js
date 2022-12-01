@@ -1,5 +1,6 @@
 export const homeObjOne = {
     id: 'about',
+    route: 'chart',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
@@ -7,7 +8,7 @@ export const homeObjOne = {
     headline: 'Unlimited Music Analysis For Free',
     description: 'Tap into music data that allows you to' +
         ' research historical playback trends ',
-    buttonLabel: 'Get started',
+    buttonLabel: 'Try Chart',
     imgStart: false,
     img: require('../../images/svg-4.png'),
     alt: 'graph',
@@ -18,6 +19,7 @@ export const homeObjOne = {
 
 export const homeObjTwo = {
     id: 'discover',
+    route: '',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
@@ -35,6 +37,7 @@ export const homeObjTwo = {
 
 export const homeObjThree = {
     id: 'services',
+    route: '',
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
@@ -54,6 +57,7 @@ export const homeObjThree = {
 
 export const homeObjFour = {
     id: 'signup',
+    route: '',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,

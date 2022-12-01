@@ -50,8 +50,8 @@ const Footer = () => {
                 <SocialMedia>
                     <SocialMediaWrap>
                         <SocialLogo
-                            to='/'
-                            className="grow"
+                            to='top'
+                            className="growSm"
                         >
                             Music Insights
                         </SocialLogo>
