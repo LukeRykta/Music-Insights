@@ -13,7 +13,7 @@ import Navbar from "../components/navbar/NavBar";
 import tempAlbumArt from "../assets/tempAlbumArt.png";
 
 const Home = () => {
-    const defaultAlbum = '4Uv86qWpGTxf7fU7lG5X6F';
+    const defaultAlbum = '4j8uA4o5U4eoZJ2jXbNklD';
     const {getToken, getGenres} = useContext(SpotifyContext);
     const {getTracksInAlbum} = useContext(SpotifyContext);
     const {getTrackHistoricStats} = useContext(SpotifyContext);
@@ -133,7 +133,8 @@ const Home = () => {
                                     value={search}
                                     type="text"
                                     placeholder="album id"
-                                    className="mt-3"/>
+                                    className="mt-3"
+                                />
                                 <FormText className="text-muted">
                                     Enter an Album ID to return song list
                                 </FormText>

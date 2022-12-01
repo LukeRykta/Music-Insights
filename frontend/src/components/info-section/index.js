@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import {
     BtnWrap,
     Column1, Column2,
@@ -11,6 +11,7 @@ import {
     TopLine
 } from "./InfoElements";
 import {Btn} from "../buttons/ButtonElements";
+import { useOnScreen } from '../../utils';
 
 const InfoSection = ({
     lightBg,
@@ -28,9 +29,17 @@ const InfoSection = ({
     dark,
     dark2,
     route,
+                         handleNavScrolled,
     }) => {
+
+    const myRef = useRef();
+
+    const isVisible = useOnScreen(myRef);
+
+    handleNavScrolled(id, isVisible);
+
     return (
-        <>
+        <div ref={myRef}>
             <InfoContainer lightBg={lightBg} id={id}>
                 <InfoWrapper>
                     <InfoRow imgStart={imgStart}>
@@ -46,7 +55,8 @@ const InfoSection = ({
                                         primary={primary ? 1 : 0}
                                         dark={dark ? 1 : 0}
                                         dark2={dark2 ? 1 : 0}
-                                    >{buttonLabel}
+                                    >
+                                        {buttonLabel}
                                     </Btn>
                                 </BtnWrap>
                             </TextWrapper>
@@ -59,7 +69,7 @@ const InfoSection = ({
                     </InfoRow>
                 </InfoWrapper>
             </InfoContainer>
-        </>
+        </div>
     )
 }
 

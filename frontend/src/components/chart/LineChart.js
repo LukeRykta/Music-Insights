@@ -33,8 +33,8 @@ const dummyData = [...Array(365).keys()];
 // const song2data = ['648', '234', '734', '845', '534', '375', '764', '235', '534', '154', '743', '273'];
 // const song3data = ['156', '235', '345', '263', '624', '267', '152', '345', '845', '483', '245', '135'];
 
-const allSongData = [song1data, song2data, song3data, song1data, song2data, song3data, song1data, song2data, song3data];
-
+// const allSongData = [song1data, song2data, song3data, song1data, song2data, song3data, song1data, song2data, song3data];
+const allSongData = [dummyData];
 // const songNames = [{name: "Legend", value: '0'}, {name: "Energy", value: '1'}, {name: "10 Bands", value:'2'}, {name: "Know Yourself", value: '3'},
 //                     {name: "No Tellin'", value: '4'}, {name: "Madonna", value: '5'}, {name: "6 God", value: '6'}, {name: "Star67", value: '7'},
 //                      {name: "Preach", value: '8'}]
@@ -46,6 +46,17 @@ export const view = {
     yLables: ['January', null, null, 'February', null, null,'March','April','May','June','July','August','September','October','November','December'],
     mLables: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6','Week 7','Week 8'],
     wLables: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+}
+
+const monthDayObj = {
+    0: 'January',
+    31: 'February',
+    59: 'March',
+    89: 'April',
+    100: 'May',
+    120: 'June',
+    150: 'July',
+    200: 'August',
 }
 
 export const options = {
@@ -139,7 +150,8 @@ function LineChart(size) {
     }
 
     let dataModel = {
-        labels: label,
+        // labels: label,
+        labels: dummyData,
         datasets: [
             {
                 data: allSongData.map(getSet).at(songIndex),

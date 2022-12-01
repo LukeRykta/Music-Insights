@@ -32,32 +32,49 @@ const NavBar = ({ search, handleSearchChange, toggle, selectedNavItem, handleNav
     }
 
     return (
-        <>
-            <Nav>
-                <NavbarContainer>
-                    <NavLogo to='/'>Music Insights</NavLogo>
-                    <MobileIcon onClick={toggle}>
-                        <FaBars />
-                    </MobileIcon>
-                    <NavMenu>
+        <Nav>
+            <NavbarContainer>
+                <NavLogo to='/'>Music Insights</NavLogo>
+                <MobileIcon onClick={toggle}>
+                    <FaBars />
+                </MobileIcon>
+                <NavMenu>
+
+                    <LeftWrapper>
                         <NavItem>
                             <NavLinks
                                 to="about"
+                                onClick={() => handleNavScrolled('about', 'toggle')}
+                                style={{
+                                    borderBottom: selectedNavItem === 'about' ? '4px solid #01bf71' : ''
+                                }}
                             >About</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="discover"
+                                onClick={() => handleNavScrolled('discover', 'toggle')}
+                                style={{
+                                    borderBottom: selectedNavItem === 'discover' ? '4px solid #01bf71' : ''
+                                }}
                             >Discover</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="services"
+                                onClick={() => handleNavScrolled('services', 'toggle')}
+                                style={{
+                                    borderBottom: selectedNavItem === 'services' ? '4px solid #01bf71' : ''
+                                }}
                             >Services</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks
                                 to="signup"
+                                onClick={() => handleNavScrolled('signup', 'toggle')}
+                                style={{
+                                    borderBottom: selectedNavItem === 'signup' ? '4px solid #01bf71' : ''
+                                }}
                             >Sign Up</NavLinks>
                         </NavItem>
                     </LeftWrapper>
@@ -82,7 +99,6 @@ const NavBar = ({ search, handleSearchChange, toggle, selectedNavItem, handleNav
                     </NavMenu>
                 </NavbarContainer>
             </Nav>
-        </>
 
     );
 }
