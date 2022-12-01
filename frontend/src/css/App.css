@@ -1,0 +1,147 @@
+.App {
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s ease-in-out;
+  }
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  z-index: 3;
+}
+
+.box-shadow-test{
+  box-shadow: 0px 1px 20px 1px rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 15px!important;
+  z-index: 3;
+}
+
+.chart-size{
+  padding-inline: 4vw;
+}
+
+.Genre-buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.welcomeDescription{
+  color: #00FFA4FF;
+}
+
+.tryBtn{
+  --bs-btn-color: #3f3f3f;
+  --bs-btn-bg: #00FFA4FF;
+  --bs-btn-border-color: #00FFA4FF;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #156e52;
+  --bs-btn-hover-border-color: #146c43;
+  --bs-btn-focus-shadow-rgb: 60, 153, 110;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #146c43;
+  --bs-btn-active-border-color: #13653f;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #198754;
+  --bs-btn-disabled-border-color: #198754;
+}
+
+.App-link {
+  color: #61dafb;
+  --main-background-color: #3a3b3c; /* Main background color */
+  --banner-color: #30854f; /* Dark Green for the header */
+  --inner-panel-color: #FEFEFE; /* Inner Panel for the charts */
+  --navbar-color: #5c5d5d; /* Navigation Bar */
+  --accent-color: #1DB954; /* Spotify green accent colors for buttons and text borders etc */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.title {
+  text-align: center;
+  max-width: fit-content;
+}
+
+.category {
+  border-bottom: 3px solid #00ffa4;
+  color: #00ffa7;
+}
+
+.searchCategory {
+  border-bottom: 3px solid #00ffa4;
+  margin-bottom: 20px;
+}
+
+.itemPointer {
+  cursor: pointer;
+}
+
+.chart-footer {
+  border-bottom: 3px solid rgba(40, 44, 52, 0.49);
+  color: #00ffa7;
+}
+
+.grow {
+  transition: all .1s ease-in-out;
+}
+
+.grow:hover {
+  color: #000000;
+  transform: scale(1.1);
+}
+
+.growSm {
+  transition: all .05s ease-in-out;
+}
+
+.growSm:hover {
+  color: #01bf71;
+  transform: scale(1.01);
+}
+
+.growTrack {
+  transition: all .1s ease-in-out;
+}
+
+.growTrack:hover {
+  transform: translateY(-10%);
+}
+
+.parent {
+  color: gainsboro;
+}
+.child {
+  display: inline-block;
+  padding: 1rem 2rem;
+  vertical-align: middle;
+}
+
+.header-color{
+  background-color: #282c34;
+}
